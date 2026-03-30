@@ -1,27 +1,20 @@
-# RepositorioTemplate
-Esse repositório é para ser utilizado pelos grupos como um template inicial.
-As seções do Template NÃO DEVEM SER OMITIDAS, sendo TODAS RELEVANTES.
-Demais diretrizes constam no Moodle.
-
-**!! Atenção: Renomeie o seu repositório para (Ano.Semestre)(Turma)_(Grupo)_(NomeDoProjeto)_(Entrega_01)*. !!** 
-
-**!! *Não coloque os nomes dos alunos no título do repositório*. !!**
-
-**!! *Exemplo de título correto: 2026.1(T01)_G1_JogoSustentabilidade_Entrega_01*. !!** 
- 
- (Apague esses comentários)
-
 # Nome do Projeto
 
 **Código da Disciplina**: FGA0208<br>
-**Número do Grupo**: XX<br>
+**Número do Grupo**: G5<br>
 **Entrega**: 01<br>
 
 ## Alunos
-|Matrícula | Aluno |
+| Matrícula | Aluno |
 | -- | -- |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
-| xx/xxxxxx  |  xxxx xxxx xxxxx |
+| 22/2015060 | Ana Luiza Pfeilsticker |
+| 22/2006211 | Vitor Valério Hoffmann |
+| 22/2021998 | Mateus Magno |
+| 23/1011462 | Heloisa Silva |
+| 22/2006552 | Antonio Carvalho |
+| 20/2046265 | Mário Vinicius |
+| 21/1062320 | Miguel Arthur |
+| 20/0035703 | Breno Alexandre |
 
 ## Sobre 
 Contextualize, usando referências, links, e outros materiais como fontes.
