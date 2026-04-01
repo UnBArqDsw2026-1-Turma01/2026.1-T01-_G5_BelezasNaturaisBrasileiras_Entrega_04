@@ -88,6 +88,20 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | **How?** (Como será realizado?)      | Utilizando o NestJS para construir APIs RESTful robustas que gerenciem a autenticação (ex: JWT) e autorização (RBAC). O PostgreSQL será usado para modelar as relações entre Usuários, Perfis e as Trilhas cadastradas. O front-end em React consumirá essas APIs para renderizar os fluxos de cadastro Fast-Track de forma intuitiva.       |
 | **How Much?** (Quanto custará?)      | Custo financeiro isento devido à adoção de tecnologias open-source e infraestrutura em _free tier_. O custo principal baseia-se no esforço técnico e nas horas de trabalho dedicadas (estimadas em 60 a 70 horas) ao longo do ciclo de desenvolvimento do projeto acadêmico.                                                                 |
 
+---
+
+### 👤 Integrante: Paulo Filho
+
+| Pergunta                           | Resposta                                                                                                                                                                                                                                                                                                                                        |
+| :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **What?** (O que será feito?) | Desenvolvimento de uma **plataforma digital colaborativa** para informações sobre áreas turísticas naturais brasileiras. O sistema integrará um blog a um catálogo de trilhas e ecoturismo, permitindo o cadastro de locais por usuários e a criação de rotas organizadas por guias locais. |
+| **Why?** (Por que será feito?) | Para promover o **turismo sustentável** e a economia local, conectando turistas diretamente a guias. O objetivo é reduzir a dependência de agências caras e ampliar a visibilidade de destinos naturais pouco explorados no Brasil de forma consciente. |
+| **Where?** (Onde será implementado?) | Plataforma digital acessível via **desktop, website e dispositivos móveis**. A atuação abrange todo o território brasileiro, com foco em regiões de alto potencial turístico natural. |
+| **When?** (Quando será executado?) | Durante o semestre letivo de **2026.1**, dentro da disciplina de Arquitetura e Desenho de Software. O cronograma inclui levantamento de requisitos, prototipação, modelagem, desenvolvimento e validação. |
+| **Who?** (Quem será o responsável?) | **Responsáveis:** Equipe ágil (Grupo de ADS) composta por Product Owner, Scrum Master e desenvolvedores (Full Stack). **Atores Envolvidos:** Turistas e guias locais como principais stakeholders. |
+| **How?** (Como será realizado?) | Utilizando **metodologias ágeis (Scrum e Kanban)** e modelagem BPMN. A stack tecnológica conta com **React** no front-end e **Node.js com NestJS** no back-end, estruturados em uma arquitetura em camadas. |
+| **How Much?** (Quanto custará?) | **Custo zero**, devido ao cunho estritamente acadêmico do projeto. O investimento principal consiste nas horas de dedicação técnica da equipe para o cumprimento dos requisitos da disciplina. |
+
 ## Entregáveis esperados
 
 - Conjunto de esboços de solução.
@@ -102,3 +116,4 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | 1.2    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Antonio Carvalho](https://github.com/antonioscarvalho) |         |
 | 1.3    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Miguel Arthur](https://github.com/zlimaz)              |         |
 | 1.4    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     |         |
+| 1.5    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Paulo Filho](https://github.com/PauloFilho2)       |         |
