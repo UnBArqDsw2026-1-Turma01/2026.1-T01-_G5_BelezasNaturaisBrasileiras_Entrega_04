@@ -45,16 +45,16 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 
 ---
 
-### 👤 Integrante: [Nome do Integrante 2]
+### 👤 Integrante: Antonio Carvalho
 | Pergunta | Resposta |
 | :--- | :--- |
-| **What?** (O que será feito?) | |
-| **Why?** (Por que será feito?) | |
-| **Where?** (Onde será implementado?) | |
-| **When?** (Quando será executado?) | |
-| **Who?** (Quem será o responsável?) | |
-| **How?** (Como será realizado?) | |
-| **How Much?** (Quanto custará?) | |
+| **What?** (O que será feito?) | Desenvolvimento do Módulo de Agendamento e Gestão de Expedições. O foco é criar a interface de inscrição para trilhas e o sistema de comunicação direta (chat 1-para-1) entre o participante e o Mestre de Caravana. Inclui a geração de códigos de confirmação e a funcionalidade de validação de presença por parte do organizador. |
+| **Why?** (Por que será feito?) | Para oferecer segurança e organização no ecoturismo. O objetivo é evitar pagamentos antecipados sem confirmação e garantir que apenas guias/organizadores qualificados (Líderes de Expedição) gerenciem os grupos, resolvendo o problema da falta de uma plataforma centralizada para marcar trilhas e peregrinações. |
+| **Where?** (Onde será implementado?) | A funcionalidade será integrada ao core da aplicação web. A interface de gestão será otimizada para dispositivos móveis, permitindo que o organizador valide os códigos de presença dos participantes diretamente no ponto de encontro da trilha. |
+| **When?** (Quando será executado?) | O cronograma segue o semestre letivo de 2026.1 da UnB, com a implementação das regras de negócio de inscrição e chat previstas para a segunda etapa de entregas da disciplina de ADS, finalizando o ciclo de desenvolvimento em Julho/2026. |
+| **Who?** (Quem será o responsável?) | Responsável Técnico: Equipe (Desenvolvimento de Regras de Negócio e Chat). Atores Envolvidos: Usuários Visitantes (que buscam as vagas) e Líderes de Expedição (que gerenciam as rotas e aprovam os membros). |
+| **How?** (Como será realizado?) | Implementando uma arquitetura orientada a eventos para as notificações de inscrição. Tecnicamente, utilizaremos o NestJS para gerenciar a lógica de permissões e o status das vagas no banco PostgreSQL, enquanto o React fornecerá o painel de controle do organizador para "Validar Membros" via código único. |
+| **How Much?** (Quanto custará?) | Custo zero em termos de licenciamento de software. O esforço humano estimado é de 70 horas de desenvolvimento e testes. A infraestrutura de hospedagem será providenciada de forma voluntária em servidor privado de um membro da equipe. |
 
 ---
 
