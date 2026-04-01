@@ -58,16 +58,16 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 
 ---
 
-### 👤 Integrante: [Nome do Integrante 3]
+### 👤 Integrante: Miguel Arthur Oliveira de Lima
 | Pergunta | Resposta |
 | :--- | :--- |
-| **What?** (O que será feito?) | |
-| **Why?** (Por que será feito?) | |
-| **Where?** (Onde será implementado?) | |
-| **When?** (Quando será executado?) | |
-| **Who?** (Quem será o responsável?) | |
-| **How?** (Como será realizado?) | |
-| **How Much?** (Quanto custará?) | |
+| **What?** (O que será feito?) |O desenvolvimento da arquitetura e modelagem de uma plataforma digital híbrida (web/mobile) de mapeamento colaborativo e gestão de ecoturismo focada em localidades brasileiras. O sistema atuará como um ecossistema que conecta descobridores de belezas naturais a Guias Locais. O escopo técnico abrange quatro features centrais: Conexão Ponto-Trilha (vinculação automatizada de locais a pacotes), Cadastro Fast-Track (inserção ágil de metadados geográficos por guias), Sistema de Controle de Vagas (gestão de concorrência e aprovação de reservas) e Motor de Gamificação (distribuição de insígnias digitais pós-conclusão).|
+| **Why?** (Por que será feito?) |O mercado de ecoturismo no Brasil sofre com a fragmentação de dados e a alta intermediação. Plataformas de geolocalização puras (como Wikiloc) carecem de curadoria e ferramentas de gestão de negócios para profissionais, enquanto agências tradicionais elevam o custo para o turista. A plataforma visa resolver esta ineficiência desintermediando o contato através de um sistema seguro, gerando valor direto para o Guia Local e incentivando o engajamento contínuo do Turista por meio de gamificação e descoberta colaborativa.|
+| **Where?** (Onde será implementado?) |A modelagem e documentação ocorrerão de forma colaborativa utilizando ferramentas de diagramação (Figma, softwares de modelagem UML/BPMN). A aplicação será projetada para implantação em ambiente de nuvem (Cloud), visando alta disponibilidade e escalabilidade nacional, permitindo acesso responsivo tanto via navegadores desktop quanto dispositivos móveis no terreno.|
+| **When?** (Quando será executado?) |O projeto será desenvolvido iterativamente ao longo do atual semestre acadêmico. O cronograma seguirá os marcos da disciplina de Arquitetura e Desenho de Software, iniciando com a ideação (Design Sprint e mapas mentais), passando pela modelagem de processos de negócio (BPMN), e culminando na entrega dos protótipos e diagramas arquiteturais da solução.|
+| **Who?** (Quem será o responsável?) |A equipe de engenharia (Grupo 5), responsável pela modelagem de processos, levantamento de requisitos e definição da arquitetura de software.|
+| **How?** (Como será realizado?) |O desenvolvimento será guiado por metodologias ágeis e práticas de engenharia de software. Os fluxos de negócio críticos (como o processo de solicitação e aprovação de vagas pelo Guia) serão mapeados em notação BPMN para eliminar gargalos lógicos. A arquitetura back-end em NestJS exigirá a construção de uma API RESTful robusta, capaz de gerenciar concorrência no banco de dados para reservas e aplicar lógicas de controle de acesso (RBAC) para separar as permissões de Turistas, Guias e Administradores. O front-end em React consumirá essas APIs e integrará serviços de mapas.|
+| **How Much?** (Quanto custará?) |O custo financeiro operacional será mitigado pela adoção de infraestrutura em free tier (hospedagem de aplicações, instâncias de banco de dados e APIs de geolocalização gratuitas/open-source). O custo real do projeto é medido no esforço técnico e horas de trabalho dedicadas pelos membros do grupo nas fases de pesquisa, levantamento de requisitos, diagramação arquitetural e prototipagem durante o ciclo letivo.|
 
 ---
 
@@ -83,3 +83,4 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | 1.0    | 01/04/2026 | Criação do documento e adição da estrutura base | [Ana Luiza](https://github.com/ana-pfeilsticker) |         |
 | 1.1    | 01/04/2026 | Inclusão dos templates 5W2H, justificativa e preenchimento do 5w2h individual    | [Ana Luiza](https://github.com/ana-pfeilsticker)                           |         |
 | 1.2    | 01/04/2026 | Preenchimento do 5w2h individual    | [Antonio Carvalho](https://github.com/antonioscarvalho)                           |         |
+| 1.3    | 01/04/2026 | Preenchimento do 5w2h individual    | [Miguel Arthur](https://github.com/zlimaz)                           |         |
