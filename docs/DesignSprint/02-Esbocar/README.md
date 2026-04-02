@@ -114,9 +114,21 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | **When?** (Quando será executado?)   |O projeto será realizado durante o semestre pela disciplina de arquitetura de software do curso de engenharia de software da Universidade de Brasília, sendo o final previsto para 29/06                                                                                         |
 | **Who?** (Quem será o responsável?)  | A equipe será responsável pela realização. do projeto que tem como público alvo amantes de trilha e natureza que tenham vontade de conhecer belezas naturais                                                                                         |
 | **How?** (Como será realizado?)      | A equipe decidiu utilizar o Scrum, combinado com Kanban. Será utilizado para o desenvolvimento REACT para o frontend    e NESTJS para o backend             |
-| **How Much?** (Quanto custará?)      | Considerando o salário médio de um profissional Junior como 2600 mensais e que o projeto custará por volta de 60 horas trabalhadas, o custo sairia por volta de 7818 reais                                                                                            |
+| **How Much?** (Quanto custará?)      | O progeto durara por volta de 60 horas trabalhadas, mas como se trata de um projeto academico os custos serão nulos. |                                                                                        |
 
 ---
+
+### 👤 Integrante: Mateus Magno
+
+| Pergunta | Resposta |
+| :--- | :--- |
+| **What?** (O que será feito?) | Desenvolvimento do **Núcleo de Eventos e Sistema de Validação**. O foco é a implementação do ciclo de vida das trilhas: criação pelo Organizador, fluxo de inscrição com chat 1-para-1 e a validação final via código único para concessão de badges. |
+| **Why?** (Por que será feito?) | Para profissionalizar a organização de trilhas e peregrinações, mitigando riscos de fraudes financeiras através de avisos nativos e garantindo que o perfil do usuário reflita sua experiência real no mundo físico através de badges validadas. |
+| **Where?** (Onde será feito?) | Aplicação Web Escalável (SPA). O sistema será focado inicialmente no ecoturismo e rotas de peregrinação, visando atender a demanda de comunidades de trilheiros e exploradores de belezas naturais no Brasil. |
+| **When?** (Quando será feito?) | O desenvolvimento ocorrerá durante o primeiro semestre de 2026, com a entrega do MVP funcional programada para o fechamento da disciplina de Arquitetura de Software em Julho. |
+| **Who?** (Quem são os envolvidos?) | **Equipe:** Desenvolvedores Full-stack. **Público-alvo:** Organizadores de eventos de aventura, guias e usuários comuns que buscam grupos confiáveis para prática de atividades na natureza. |
+| **How?** (Como será realizado?) | Utilizando **NestJS** para a arquitetura do backend e **PostgreSQL** para persistência de dados transacionais. A interface será construída em **React com TypeScript**, garantindo a integridade do fluxo de validação de códigos. |
+| **How Much?** (Quanto vai custar?) | Investimento estimado em **80 horas técnicas** de desenvolvimento especializado. Custos de infraestrutura nulos pelo uso de tecnologias open-source e custos de hospedagem oferecidos voluntariamente por um membro da equipe. |
 
 ## Entregáveis esperados
 
@@ -134,3 +146,4 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | 1.4    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     |         |
 | 1.5    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Paulo Filho](https://github.com/PauloFilho2)       |         |
 | 1.6    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Heloisa Silva](https://github.com/Heloisa-Santos)       |         |
+| 1.7   | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Mateus Magno](https://github.com/mtsmgn0)       |         |
