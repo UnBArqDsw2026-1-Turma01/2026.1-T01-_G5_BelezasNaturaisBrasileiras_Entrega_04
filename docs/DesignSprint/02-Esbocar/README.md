@@ -117,14 +117,14 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 ### 👤 Integrante: Heloisa Silva
 
 | Pergunta                             | Resposta                                                                                                                                                                                      |
-| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
+| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- |
 | **What?** (O que será feito?)        | A equipe desenvolverá um sistema web em formato de Blog para conectar amantes de trilhas e natureza que tenham interesse em conhecer belezas naturais em suas redondezas ou em novos lugares. |
-| **Why?** (Por que será feito?)       | O objetivo é disponibilizar uma plataforma que conecte pessoas que se conheçam trilhas e ofereçam caravanas e excursões para conhecer os locais compartilhados dentro de sistema.             |
-| **Where?** (Onde será implementado?) | O projeto será desenvolvido em ambiente web com acessibilidade possível em aparelhos desktop e dispositivos móveis                                                                            |
-| **When?** (Quando será executado?)   | O projeto será realizado durante o semestre pela disciplina de arquitetura de software do curso de engenharia de software da Universidade de Brasília, sendo o final previsto para 29/06      |
-| **Who?** (Quem será o responsável?)  | A equipe será responsável pela realização. do projeto que tem como público alvo amantes de trilha e natureza que tenham vontade de conhecer belezas naturais                                  |
-| **How?** (Como será realizado?)      | A equipe decidiu utilizar o Scrum, combinado com Kanban. Será utilizado para o desenvolvimento REACT para o frontend e NESTJS para o backend                                                  |
-| **How Much?** (Quanto custará?)      | O progeto durara por volta de 60 horas trabalhadas, mas como se trata de um projeto academico os custos serão nulos.                                                                          |     |
+| **Why?** (Por que será feito?)       | O objetivo é disponibilizar uma plataforma que conecte pessoas que conheçam trilhas e ofereçam caravanas e excursões para conhecer os locais compartilhados dentro do sistema.                |
+| **Where?** (Onde será implementado?) | O projeto será desenvolvido em ambiente web com acessibilidade possível em aparelhos desktop e dispositivos móveis.                                                                           |
+| **When?** (Quando será executado?)   | O projeto será realizado durante o semestre pela disciplina de arquitetura de software do curso de engenharia de software da Universidade de Brasília, sendo o final previsto para 29/06.     |
+| **Who?** (Quem será o responsável?)  | A equipe será responsável pela realização do projeto que tem como público-alvo amantes de trilha e natureza que tenham vontade de conhecer belezas naturais.                                  |
+| **How?** (Como será realizado?)      | A equipe decidiu utilizar o Scrum, combinado com Kanban. Será utilizado para o desenvolvimento REACT para o frontend e NESTJS para o backend.                                                 |
+| **How Much?** (Quanto custará?)      | O projeto durará por volta de 60 horas trabalhadas, mas como se trata de um projeto acadêmico os custos serão nulos.                                                                          |     |     |
 
 ---
 
@@ -163,15 +163,16 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 
 ## Planilha de versionamento
 
-| Versão | Data       | Descrição                                                                     | Autor                                                   | Revisor                                             |
-| :----- | :--------- | :---------------------------------------------------------------------------- | :------------------------------------------------------ | :-------------------------------------------------- |
-| 1.0    | 01/04/2026 | Criação do documento e adição da estrutura base                               | [Ana Luiza](https://github.com/ana-pfeilsticker)        | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.1    | 01/04/2026 | Inclusão dos templates 5W2H, justificativa e preenchimento do 5w2h individual | [Ana Luiza](https://github.com/ana-pfeilsticker)        | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.2    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Antonio Carvalho](https://github.com/antonioscarvalho) | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.3    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Miguel Arthur](https://github.com/zlimaz)              | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.4    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.5    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Paulo Filho](https://github.com/PauloFilho2)           | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.6    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Heloisa Silva](https://github.com/Heloisa-Santos)      | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.7    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Mateus Magno](https://github.com/mtsmgn0)              | [Vitor Hoffmann](https://github.com/vitor-hoffmann) |
-| 1.8    | 02/04/2026 | Preenchimento do 5w2h individual                                              | [Mário Vinícius](https://github.com/MarioViniciusBC)    | [Mateus Magno](https://github.com/mtsmgn0)          |
-| 1.9    | 01/04/2026 | Inclusão do mapa mental preliminar desenvolvido em sala                       | [Mateus Magno](https://github.com/mtsmgn0)              | [Vitor Hoffmann](https://github.com/vitor-hoffmann) |
+| Versão | Data       | Descrição                                                                     | Autor                                                   | Revisor                                                 |
+| :----- | :--------- | :---------------------------------------------------------------------------- | :------------------------------------------------------ | :------------------------------------------------------ |
+| 1.0    | 01/04/2026 | Criação do documento e adição da estrutura base                               | [Ana Luiza](https://github.com/ana-pfeilsticker)        | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.1    | 01/04/2026 | Inclusão dos templates 5W2H, justificativa e preenchimento do 5w2h individual | [Ana Luiza](https://github.com/ana-pfeilsticker)        | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.2    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Antonio Carvalho](https://github.com/antonioscarvalho) | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.3    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Miguel Arthur](https://github.com/zlimaz)              | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.4    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.5    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Paulo Filho](https://github.com/PauloFilho2)           | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.6    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Heloisa Silva](https://github.com/Heloisa-Santos)      | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.7    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Mateus Magno](https://github.com/mtsmgn0)              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     |
+| 1.8    | 02/04/2026 | Preenchimento do 5w2h individual                                              | [Mário Vinícius](https://github.com/MarioViniciusBC)    | [Mateus Magno](https://github.com/mtsmgn0)              |
+| 1.9    | 01/04/2026 | Inclusão do mapa mental preliminar desenvolvido em sala                       | [Mateus Magno](https://github.com/mtsmgn0)              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     |
+| 1.10   | 03/04/2026 | Arrumar formatação e correção gramatical                                      | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     | [Ana Pfeilsticker](https://github.com/ana-pfeilsticker) |
