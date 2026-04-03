@@ -152,7 +152,7 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | **When?** (Quando será feito?)     | **Prazo de Execução:** Durante o semestre letivo de 2026.1 da disciplina de Arquitetura e Desenho de Software. **Marco Atual:** O escopo inicial e o planejamento base (Módulo Base) têm entrega fixada para o dia 06/04/2026. |
 | **Who?** (Quem são os envolvidos?) | **Equipe de Desenvolvimento:** Grupo 5, composto por 10 alunos de Engenharia de Software da UnB. **Atores do Sistema:** Administrador, Usuário Visitante/Turista, Guia Local/Mestre de Caravana |
 | **How?** (Como será realizado?)    | **Metodologia de Design:** O planejamento seguirá as 5 etapas da Design Sprint adaptada para a disciplina (Unpack, Sketch, Decide, Prototype, Validate). **Modelagem:** A arquitetura e os processos do sistema utilizarão metodologias ágeis (com processos modelados em notação BPMN). **Stack Tecnológica:** O desenvolvimento técnico será feito utilizando **NestJS** no back-end e **React** no front-end.|
-| **How Much?** (Quanto vai custar?) | **Fase Acadêmica:** O custo principal é medido em esforço humano (horas de estudo, reuniões, design e codificação dos 10 integrantes do grupo). **Ferramentas:** Uso de licenças educacionais e camadas gratuitas (Figma, GitHub, Trello/Jira, Docsify). **Fase de Produção (Futuro):** Custos operacionais de infraestrutura em nuvem (servidores AWS/GCP, hospedagem de banco de dados) e registro de domínio. |
+| **How Much?** (Quanto vai custar?) | **Fase Acadêmica:** O custo principal é medido em esforço humano (horas de estudo, reuniões, design e codificação dos 10 integrantes do grupo). **Ferramentas:** Uso de licenças educacionais e camadas gratuitas (Figma, GitHub, Trello/Jira, Docsify). **Fase de Produção (Futuro):** Possíveis custos operacionais de infraestrutura em nuvem (servidores AWS/GCP, hospedagem de banco de dados) e registro de domínio caso desejemos sair do escopo atualmente disponibilizado pelo servidor do nosso colega. |
 
 ---
 
@@ -165,13 +165,14 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 
 | Versão | Data       | Descrição                                                                     | Autor                                                   | Revisor |
 | :----- | :--------- | :---------------------------------------------------------------------------- | :------------------------------------------------------ | :------ |
-| 1.0    | 01/04/2026 | Criação do documento e adição da estrutura base                               | [Ana Luiza](https://github.com/ana-pfeilsticker)        |         |
-| 1.1    | 01/04/2026 | Inclusão dos templates 5W2H, justificativa e preenchimento do 5w2h individual | [Ana Luiza](https://github.com/ana-pfeilsticker)        |         |
-| 1.2    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Antonio Carvalho](https://github.com/antonioscarvalho) |         |
-| 1.3    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Miguel Arthur](https://github.com/zlimaz)              |         |
-| 1.4    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     |         |
-| 1.5    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Paulo Filho](https://github.com/PauloFilho2)       |         |
-| 1.6    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Heloisa Silva](https://github.com/Heloisa-Santos)       |         |
+| 1.0    | 01/04/2026 | Criação do documento e adição da estrutura base                               | [Ana Luiza](https://github.com/ana-pfeilsticker)        | Mateus Magno |
+| 1.1    | 01/04/2026 | Inclusão dos templates 5W2H, justificativa e preenchimento do 5w2h individual | [Ana Luiza](https://github.com/ana-pfeilsticker)        | Mateus Magno |
+| 1.2    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Antonio Carvalho](https://github.com/antonioscarvalho) | Mateus Magno |
+| 1.3    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Miguel Arthur](https://github.com/zlimaz)              | Mateus Magno |
+| 1.4    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     | Mateus Magno |
+| 1.5    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Paulo Filho](https://github.com/PauloFilho2)       | Mateus Magno |
+| 1.6    | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Heloisa Silva](https://github.com/Heloisa-Santos)       | Mateus Magno |
 | 1.7   | 01/04/2026 | Preenchimento do 5w2h individual                                              | [Mateus Magno](https://github.com/mtsmgn0)       |         |
-| 1.7   | 02/04/2026 | Preenchimento do 5w2h individual                                              | [Mário Vinícius](https://github.com/MarioViniciusBC)       |         |
+| 1.8   | 02/04/2026 | Preenchimento do 5w2h individual                                              | [Mário Vinícius](https://github.com/MarioViniciusBC)       | Mateus Magno |
+| 1.9   | 01/04/2026 | Inclusão do mapa mental preliminar desenvolvido em sala                                       | [Mateus Magno](https://github.com/mtsmgn0)       |         |
 
