@@ -16,6 +16,16 @@ Explorar diferentes alternativas para resolver o desafio definido na etapa anter
 
 ---
 
+## Mapa Mental Preliminar
+
+Durante a fase de ideação e esboço das propostas, elaboramos um mapa mental preliminar estruturando as ramificações iniciais de funcionalidades e arquitetura do sistema. O objetivo de manter esta versão inicial registrada é compará-la posteriormente com o resultado final consolidado, após a avaliação e convergência de todas as propostas da equipe.
+
+<iframe src="assets/fase_1/images/markmap.html" width="100%" height="600px" frameborder="0" style="border: 1px solid #ddd; border-radius: 8px;">
+  Seu navegador não suporta iframes.
+</iframe>
+
+---
+
 ## 5W2H: Estruturando as Ideias
 
 Para dar suporte aos esboços e garantir que as soluções para o projeto de **Belezas Naturais** sejam viáveis e compreensíveis, o grupo decidiu adotar o framework **5W2H** de forma individual.
