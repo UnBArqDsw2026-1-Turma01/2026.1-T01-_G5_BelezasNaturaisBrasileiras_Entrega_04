@@ -44,4 +44,4 @@ O cronograma segue o calendário oficial da disciplina, dividido em quatro grand
 
 | Versão | Data       | Descrição                                   | Autor                                               | Revisor                                                 |
 | :----- | :--------- | :------------------------------------------ | :-------------------------------------------------- | :------------------------------------------------------ |
-| 1.0 | 31/03/2026 | Criação da página de Planos de Risco, Custo e Tempo. | [Antonio Carvalho](https://github.com/antonioscarvalho) |  |
+| 1.0 | 03/04/2026 | Criação da página de Planos de Risco, Custo e Tempo. | [Antonio Carvalho](https://github.com/antonioscarvalho) |  |
