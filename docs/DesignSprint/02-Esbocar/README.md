@@ -116,15 +116,16 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 
 ### 👤 Integrante: Heloisa Silva
 
-| Pergunta                             | Resposta                                                                                                                                                                                      |
-| :----------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- |
-| **What?** (O que será feito?)        | A equipe desenvolverá um sistema web em formato de Blog para conectar amantes de trilhas e natureza que tenham interesse em conhecer belezas naturais em suas redondezas ou em novos lugares. |
-| **Why?** (Por que será feito?)       | O objetivo é disponibilizar uma plataforma que conecte pessoas que conheçam trilhas e ofereçam caravanas e excursões para conhecer os locais compartilhados dentro do sistema.                |
-| **Where?** (Onde será implementado?) | O projeto será desenvolvido em ambiente web com acessibilidade possível em aparelhos desktop e dispositivos móveis.                                                                           |
-| **When?** (Quando será executado?)   | O projeto será realizado durante o semestre pela disciplina de arquitetura de software do curso de engenharia de software da Universidade de Brasília, sendo o final previsto para 29/06.     |
-| **Who?** (Quem será o responsável?)  | A equipe será responsável pela realização do projeto que tem como público-alvo amantes de trilha e natureza que tenham vontade de conhecer belezas naturais.                                  |
-| **How?** (Como será realizado?)      | A equipe decidiu utilizar o Scrum, combinado com Kanban. Será utilizado para o desenvolvimento REACT para o frontend e NESTJS para o backend.                                                 |
-| **How Much?** (Quanto custará?)      | O projeto durará por volta de 60 horas trabalhadas, mas como se trata de um projeto acadêmico os custos serão nulos.                                                                          |     |     |
+| Pergunta                             | Resposta                                                                                                                                                                                                                                                                                    |
+| :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **What?** (O que será feito?)        |  A equipe desenvolverá um sistema web em formato de Blog para conectar amantes de trilhas e natureza que tenham interesse em conhecer belezas naturais em suas redondezas ou em novos lugares. |
+| **Why?** (Por que será feito?)       |  O objetivo é disponibilizar uma plataforma que conecte pessoas que conheçam trilhas e ofereçam caravanas e excursões para conhecer os locais compartilhados dentro do sistema.                              |
+| **Where?** (Onde será implementado?) | O projeto será desenvolvido em ambiente web com acessibilidade possível em aparelhos desktop e dispositivos móveis.                                                                                                                                     |
+| **When?** (Quando será executado?)   | O projeto será realizado durante o semestre pela disciplina de arquitetura de software do curso de engenharia de software da Universidade de Brasília, sendo o final previsto para 29/06.                                                                                   |
+| **Who?** (Quem será o responsável?)  | A equipe será responsável pela realização do projeto que tem como público-alvo amantes de trilha e natureza que tenham vontade de conhecer belezas naturais.                                                                                             |
+| **How?** (Como será realizado?)      | A equipe decidiu utilizar o Scrum, combinado com Kanban. Será utilizado para o desenvolvimento REACT para o frontend e NESTJS para o backend.                                                                                     |
+| **How Much?** (Quanto custará?)      |O projeto durará por volta de 60 horas trabalhadas, mas como se trata de um projeto acadêmico os custos serão nulos.                                                                                             |
+
 
 ---
 
