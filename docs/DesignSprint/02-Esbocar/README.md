@@ -191,4 +191,4 @@ Cada membro deve preencher o seu quadro antes de iniciar o desenho do esboço fi
 | 1.8    | 02/04/2026 | Preenchimento do 5w2h individual                                              | [Mário Vinícius](https://github.com/MarioViniciusBC)    | [Mateus Magno](https://github.com/mtsmgn0)              |
 | 1.9    | 01/04/2026 | Inclusão do mapa mental preliminar desenvolvido em sala                       | [Mateus Magno](https://github.com/mtsmgn0)              | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     |
 | 1.10   | 03/04/2026 | Arrumar formatação e correção gramatical                                      | [Vitor Hoffmann](https://github.com/vitor-hoffmann)     | [Ana Pfeilsticker](https://github.com/ana-pfeilsticker) |
-| 1.11   | 05/04/2026 | Preenchimento do 5w2h individual                                      | [Breno Alexandre](https://github.com/brenoalexandre0)     | [Mateus Magno](https://github.com/mtsmgn0) |
+| 1.11   | 05/04/2026 | Preenchimento do 5w2h individual                                              | [Breno Alexandre](https://github.com/brenoalexandre0)     | [Mateus Magno](https://github.com/mtsmgn0) |
