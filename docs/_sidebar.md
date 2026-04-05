@@ -15,4 +15,4 @@
   - [1.4. Participações](Base/1.4.ParticipacoesBase.md)
   - [1.5. Iniciativas Extras](Base/1.5.IniciativasExtras.md)
     - [1.5.1 Atas de reunião](Base/1.5.1.atas.md)
-    - [1.5.2 HeatMap](Base/1.5.1.HeatMap.md)
+    - [1.5.2 HeatMap](Base/1.5.2.HeatMap.md)
