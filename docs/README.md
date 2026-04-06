@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="/docs/assets/images/as_comp_cor.jpg" alt="UnB Logo" width="400"/>
+<img src="/2026.1-T01-_G5_BelezasNaturaisBrasileiras_Entrega_01/docs/assets/images/as_comp_cor.jpg" alt="UnB Logo" width="400"/>
 
 # 🌿 Plataforma de Belezas Naturais e Trilhas
 
