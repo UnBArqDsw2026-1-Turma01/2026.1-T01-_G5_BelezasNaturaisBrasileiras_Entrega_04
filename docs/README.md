@@ -29,13 +29,13 @@
 
 1. [Sobre o Projeto](#sobre-o-projeto)
 2. [Equipe](#equipe)
-3. [Base do Projeto — Design Sprint](#base-do-projeto---design-sprint)
-4. [Processos e Modelagem — BPMN](#processos-e-modelagem---bpmn)
+3. [Base do Projeto — Design Sprint](#design-sprint)
+4. [Processos e Modelagem — BPMN](#bpmn)
 5. [Engenharia de Requisitos](#engenharia-de-requisitos)
 6. [Arquitetura e Design](#arquitetura-e-design)
 7. [Como Rodar o Projeto](#como-rodar-o-projeto)
 8. [Iniciativas Extras](#iniciativas-extras)
-9. [Histórico de Versões](#histórico-de-versões)
+9. [Histórico de Versões](#historico-versoes)
 
 ---
 
@@ -77,6 +77,7 @@ Aqui está a tabela de equipe atualizada, incluindo o **Paulo Filho** e todos os
 
 ---
  
+<span id="design-sprint"></span> 
 ## Base do Projeto — Design Sprint
  
 A base conceitual da plataforma foi construída por meio de um **Design Sprint**, metodologia ágil de cinco fases condensadas que permitiu à equipe alinhar problemas, explorar soluções e validar hipóteses antes de qualquer linha de código.
@@ -106,7 +107,8 @@ Com a solução definida, a equipe produziu protótipos navegáveis de média fi
 > **Impacto no Projeto:** O Design Sprint estabeleceu a visão compartilhada do produto, evitando retrabalho na fase de modelagem. Todas as regras de negócio (RN) e requisitos funcionais (RF) identificados nos artefatos de modelagem têm rastreabilidade direta para as decisões do Sprint.
  
 ---
- 
+
+<span id="bpmn"></span> 
 ## Processos e Modelagem — BPMN
  
 A modelagem de processos foi realizada utilizando a notação **BPMN 2.0 (Business Process Model and Notation)**, capturando os fluxos de valor mais críticos da plataforma.
@@ -322,6 +324,7 @@ Este comando sobe automaticamente o PostgreSQL, o backend e o frontend em contê
  
 ---
 
+<span id="historico-versoes"></span>
 ## Planilha de Versionamento
 
 | Versão | Data       | Descrição                                   | Autor                                               | Revisor                                                 |
