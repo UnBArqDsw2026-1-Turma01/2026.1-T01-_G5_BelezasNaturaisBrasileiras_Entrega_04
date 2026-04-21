@@ -72,7 +72,7 @@ Aqui está a tabela de equipe atualizada, incluindo o **Paulo Filho** e todos os
 | 22/2021998 | Mateus Magno | [mtsmgn0](https://github.com/mtsmgn0) |
 | 20/2046265 | Mário Vinicius | [MarioViniciusBC](https://github.com/MarioViniciusBC) |
 | 21/1062320 | Miguel Arthur | [zlimaz](https://github.com/zlimaz) |
-| - | Paulo Filho | [PauloFilho2](https://github.com/PauloFilho2) |
+| 22/1031229 | Paulo Filho | [PauloFilho2](https://github.com/PauloFilho2) |
 | 22/2006211 | Vitor Valerio Hoffmann | [vitor-hoffmann](https://github.com/vitor-hoffmann) |
 
 ---
