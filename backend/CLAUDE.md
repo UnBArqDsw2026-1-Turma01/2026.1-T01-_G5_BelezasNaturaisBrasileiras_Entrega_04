@@ -14,6 +14,16 @@ Para manter o contexto limpo, leia os arquivos abaixo apenas quando a tarefa exi
 - **Testes unitários:** Consulte `./.claude/testing.md` para regras dos testes unitários.
 - **Revisão:** Consulte `./.claude/review-checklist.md` antes de finalizar.
 
+## Setup do Banco de Dados Local (Docker)
+
+> Detalhes técnicos e troubleshooting em `./.claude/docker-setup.md`.
+
+1. Copie o arquivo de variáveis: `cp .env.example .env.local`
+2. Suba o banco: `docker-compose up -d`
+3. Acesse o pgAdmin em `http://localhost:5050` (credenciais em `.env.local`)
+4. Para conectar ao banco no pgAdmin: host `postgres`, porta `5432`, usuário/senha conforme `.env.local`
+5. Para parar: `docker-compose down` (dados persistem no volume `bnb_postgres_data`)
+
 ## Comandos Úteis
 - Build: `npm run build`
 - Testes: `npm run test`

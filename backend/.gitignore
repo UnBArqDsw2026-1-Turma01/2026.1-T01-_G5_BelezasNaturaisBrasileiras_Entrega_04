@@ -1,0 +1,14 @@
+# Variáveis de ambiente locais (nunca commitar)
+.env.local
+.env.*.local
+.env
+
+# Dependências
+node_modules/
+
+# Build
+dist/
+
+# Prisma
+prisma/migrations/dev.db
+prisma/migrations/dev.db-journal
