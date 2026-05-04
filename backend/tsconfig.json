@@ -20,7 +20,8 @@
       "@application/*": ["./src/application/*"],
       "@infrastructure/*": ["./src/infrastructure/*"],
       "@interface/*": ["./src/interface/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@shared/*": ["./src/shared/*"],
+      "@generated/*": ["./src/generated/*"]
     },
     "skipLibCheck": true,
     "strictNullChecks": true,

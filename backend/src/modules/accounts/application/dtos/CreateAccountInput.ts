@@ -2,12 +2,12 @@ import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 
 export class CreateAccountInput {
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsNotEmpty()
   @MinLength(6)
-  password: string;
+  password!: string;
 
   @IsNotEmpty()
-  nome: string;
+  nome!: string;
 }
