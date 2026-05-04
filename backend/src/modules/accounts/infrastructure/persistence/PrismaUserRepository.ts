@@ -9,6 +9,7 @@ export class PrismaUserRepository implements IUserRepository {
   constructor(private prisma: PrismaService) {}
 
   async save(user: User): Promise<User> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const raw = await this.prisma.user.create({
       data: {
         id: user.id,
@@ -19,14 +20,17 @@ export class PrismaUserRepository implements IUserRepository {
       },
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return UserMapper.toDomain(raw);
   }
 
   async findByEmail(email: string): Promise<User | null> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     const raw = await this.prisma.user.findUnique({
       where: { email },
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     return raw ? UserMapper.toDomain(raw) : null;
   }
 }

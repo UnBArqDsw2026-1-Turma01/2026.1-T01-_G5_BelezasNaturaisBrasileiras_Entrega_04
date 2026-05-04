@@ -26,7 +26,9 @@ export class CreateAccountUseCase {
         input.password,
       );
     } catch (error) {
-      throw new Error(`Falha ao criar usuário no Supabase: ${error.message}`);
+      throw new Error(
+        `Falha ao criar usuário no Supabase: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
 
     const factory = this.userFactoryRegistry.get(UserRole.COMMON_USER);
@@ -40,11 +42,11 @@ export class CreateAccountUseCase {
         await this.supabaseAuthService.deleteUser(supabaseUser.uid);
       } catch (rollbackError) {
         console.error(
-          `Erro ao fazer rollback no Supabase: ${rollbackError.message}`,
+          `Erro ao fazer rollback no Supabase: ${rollbackError instanceof Error ? rollbackError.message : String(rollbackError)}`,
         );
       }
       throw new Error(
-        `Falha ao salvar usuário no banco de dados: ${error.message}`,
+        `Falha ao salvar usuário no banco de dados: ${error instanceof Error ? error.message : String(error)}`,
       );
     }
   }

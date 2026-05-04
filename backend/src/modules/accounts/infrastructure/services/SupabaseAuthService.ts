@@ -6,10 +6,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 export class SupabaseAuthService implements ISupabaseAuthService {
   constructor(private supabase: SupabaseClient) {}
 
-  async createUser(
-    email: string,
-    password: string,
-  ): Promise<{ uid: string }> {
+  async createUser(email: string, password: string): Promise<{ uid: string }> {
     const { data, error } = await this.supabase.auth.signUp({
       email,
       password,

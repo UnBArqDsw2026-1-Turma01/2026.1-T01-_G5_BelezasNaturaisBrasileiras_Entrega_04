@@ -15,11 +15,15 @@ export class AccountController {
 
   @Post('signup')
   @HttpCode(201)
-  async signup(@Body() input: CreateAccountInput): Promise<CreateAccountOutput> {
+  async signup(
+    @Body() input: CreateAccountInput,
+  ): Promise<CreateAccountOutput> {
     try {
       return await this.createAccountUseCase.execute(input);
     } catch (error) {
-      throw new BadRequestException(error.message);
+      throw new BadRequestException(
+        error instanceof Error ? error.message : String(error),
+      );
     }
   }
 }

@@ -2,7 +2,15 @@ import { User, UserRole } from '../../domain/entities/User';
 import { CreateAccountOutput } from '../../application/dtos/CreateAccountOutput';
 
 export class UserMapper {
-  static toDomain(raw: any): User {
+  static toDomain(raw: {
+    id: string;
+    email: string;
+    nome: string;
+    role: string;
+    fotoPerfil: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+  }): User {
     return new User(
       raw.id,
       raw.email,

@@ -2,7 +2,6 @@ import { Provider } from '@nestjs/common';
 import { CommonUserFactory } from '../../infrastructure/factories/CommonUserFactory';
 import { UserFactoryRegistry } from '../../infrastructure/factories/UserFactoryRegistry';
 import { UserRole } from '../../domain/entities/User';
-import { IUserFactoryRegistry } from '../../domain/interfaces/IUserFactoryRegistry';
 
 export const userFactoryProviders: Provider[] = [
   CommonUserFactory,
