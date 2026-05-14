@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import type { IUserRepository } from '../../domain/interfaces/IUserRepository';
 import { PromoteUserInput } from '../dtos/PromoteUserInput';
 import { PromoteUserOutput } from '../dtos/PromoteUserOutput';
@@ -13,7 +13,7 @@ export class PromoteUserUseCase {
   async execute(input: PromoteUserInput): Promise<PromoteUserOutput> {
     const user = await this.userRepository.findByEmail(input.email);
     if (!user) {
-      throw new Error('Usuário não encontrado');
+      throw new NotFoundException('Usuário não encontrado');
     }
 
     // Padrão Prototype: Clona o objeto imutável alterando apenas a role
@@ -22,7 +22,7 @@ export class PromoteUserUseCase {
       updatedAt: new Date(),
     });
 
-    const savedUser = await this.userRepository.save(promotedUser);
+    const savedUser = await this.userRepository.update(promotedUser);
 
     return {
       id: savedUser.id,

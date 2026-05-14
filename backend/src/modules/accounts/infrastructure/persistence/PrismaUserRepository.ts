@@ -9,7 +9,7 @@ import { Prisma } from '@src/generated/prisma';
 export class PrismaUserRepository implements IUserRepository {
   constructor(private prisma: PrismaService) {}
 
-  async save(user: User): Promise<User> {
+  async create(user: User): Promise<User> {
     try {
       const raw = await this.prisma.user.create({
         data: {
@@ -31,6 +31,21 @@ export class PrismaUserRepository implements IUserRepository {
       throw error;
     }
   }
+
+  async update(user: User): Promise<User> {
+  return this.prisma.user.update({
+    where: {
+      id: user.id,
+    },
+
+    data: {
+      role: user.role,
+      nome: user.nome,
+      fotoPerfil: user.fotoPerfil,
+      updatedAt: user.updatedAt,
+    },
+  });
+}
 
   async findByEmail(email: string): Promise<User | null> {
     try {
