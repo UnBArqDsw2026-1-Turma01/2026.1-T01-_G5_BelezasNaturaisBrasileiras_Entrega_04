@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(.env.example)",
+      "Write(.env.local)",
+      "Bash(cp *)",
+      "Bash(docker-compose *)",
+      "Bash(docker *)",
+      "Bash(npx prisma *)",
+      "Bash(ls *)"
+    ]
+  }
+}

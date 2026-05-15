@@ -3,6 +3,9 @@
 .env.*.local
 .env
 
+# Git worktrees
+.worktrees/
+
 # Dependências
 node_modules/
 
