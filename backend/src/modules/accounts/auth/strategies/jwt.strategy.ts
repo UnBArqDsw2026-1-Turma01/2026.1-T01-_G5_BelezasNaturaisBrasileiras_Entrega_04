@@ -6,9 +6,13 @@ import { Role } from '../enums/role.enum';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error('JWT_SECRET environment variable is required. Create a .env.local file and set JWT_SECRET.');
+    }
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_SECRET ?? '',
+      secretOrKey: secret,
     });
   }
 

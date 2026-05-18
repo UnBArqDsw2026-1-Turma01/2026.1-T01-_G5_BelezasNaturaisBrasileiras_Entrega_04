@@ -23,3 +23,22 @@ model User {
 
   @@map("users")
 }
+
+model Ponto {
+  id        String   @id @default(uuid())
+  titulo    String
+  descricao String?
+  regiao    String?
+  estado    String?
+  cidade    String?
+  tipo      String?
+  criadoPor String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([regiao])
+  @@index([estado])
+  @@index([cidade])
+  @@index([tipo])
+  @@map("pontos")
+}
