@@ -6,6 +6,9 @@ import { TrilhaEventEmitter } from './domain/observers/TrilhaEventEmitter';
 import { BadgeDistribuicaoObserver } from './domain/observers/BadgeDistribuicaoObserver';
 import { NotificacaoObserver } from './domain/observers/NotificacaoObserver';
 import { PrismaTrilhaRepository } from './infrastructure/persistence/PrismaTrilhaRepository';
+import { CachedTrilhaRepository } from './infrastructure/persistence/CachedTrilhaRepository';
+import { AuditedTrilhaRepository } from './infrastructure/persistence/AuditedTrilhaRepository';
+import { AuditLog } from './domain/services/AuditLog';
 import { PrismaInscricaoRepository } from '../inscricoes/infrastructure/persistence/PrismaInscricaoRepository';
 import { PrismaBadgeRepository } from './infrastructure/persistence/PrismaBadgeRepository';
 import { CriarTrilhaUseCase } from './application/use-cases/CriarTrilhaUseCase';
@@ -24,7 +27,16 @@ import { TrilhasController } from './interface/controllers/TrilhasController';
       provide: ConfirmationCodeService,
       useValue: ConfirmationCodeService.getInstance(),
     },
-    { provide: 'ITrilhaRepository', useClass: PrismaTrilhaRepository },
+    AuditLog,
+    {
+      provide: 'ITrilhaRepository',
+      useFactory: (prisma: PrismaService, auditLog: AuditLog) => {
+        const base = new PrismaTrilhaRepository(prisma);
+        const cached = new CachedTrilhaRepository(base);
+        return new AuditedTrilhaRepository(cached, auditLog);
+      },
+      inject: [PrismaService, AuditLog],
+    },
     { provide: 'IInscricaoRepository', useClass: PrismaInscricaoRepository },
     { provide: 'IBadgeRepository', useClass: PrismaBadgeRepository },
     TrilhaEventEmitter,
