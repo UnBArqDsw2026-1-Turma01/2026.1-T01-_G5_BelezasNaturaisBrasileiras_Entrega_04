@@ -9,6 +9,8 @@ import { PrismaTrilhaRepository } from './infrastructure/persistence/PrismaTrilh
 import { CachedTrilhaRepository } from './infrastructure/persistence/CachedTrilhaRepository';
 import { AuditedTrilhaRepository } from './infrastructure/persistence/AuditedTrilhaRepository';
 import { AuditLog } from './domain/services/AuditLog';
+import { TrilhaRequestContext } from './domain/services/TrilhaRequestContext';
+import { TrilhaProxyRepository } from './infrastructure/persistence/TrilhaProxyRepository';
 import { PrismaInscricaoRepository } from '../inscricoes/infrastructure/persistence/PrismaInscricaoRepository';
 import { PrismaBadgeRepository } from './infrastructure/persistence/PrismaBadgeRepository';
 import { CriarTrilhaUseCase } from './application/use-cases/CriarTrilhaUseCase';
@@ -28,14 +30,20 @@ import { TrilhasController } from './interface/controllers/TrilhasController';
       useValue: ConfirmationCodeService.getInstance(),
     },
     AuditLog,
+    TrilhaRequestContext,
     {
       provide: 'ITrilhaRepository',
-      useFactory: (prisma: PrismaService, auditLog: AuditLog) => {
+      useFactory: (
+        prisma: PrismaService,
+        auditLog: AuditLog,
+        context: TrilhaRequestContext,
+      ) => {
         const base = new PrismaTrilhaRepository(prisma);
         const cached = new CachedTrilhaRepository(base);
-        return new AuditedTrilhaRepository(cached, auditLog);
+        const audited = new AuditedTrilhaRepository(cached, auditLog);
+        return new TrilhaProxyRepository(audited, context);
       },
-      inject: [PrismaService, AuditLog],
+      inject: [PrismaService, AuditLog, TrilhaRequestContext],
     },
     { provide: 'IInscricaoRepository', useClass: PrismaInscricaoRepository },
     { provide: 'IBadgeRepository', useClass: PrismaBadgeRepository },

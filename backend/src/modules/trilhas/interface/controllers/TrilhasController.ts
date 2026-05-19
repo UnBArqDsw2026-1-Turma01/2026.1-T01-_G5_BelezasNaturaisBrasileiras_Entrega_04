@@ -16,6 +16,7 @@ import { TrilhaEventEmitter } from '../../domain/observers/TrilhaEventEmitter';
 import { IBadgeRepository } from '../../domain/interfaces/IBadgeRepository';
 import { ListarInscricoesUseCase } from '../../../inscricoes/application/use-cases/ListarInscricoesUseCase';
 import { TrilhaFacade } from '../../application/TrilhaFacade';
+import { TrilhaRequestContext } from '../../domain/services/TrilhaRequestContext';
 import { LocalizacaoComposita } from '../../domain/localizacao/LocalizacaoComposita';
 import { LocalizacaoFolha } from '../../domain/localizacao/LocalizacaoFolha';
 import { ValidarCodigoInput } from '../../application/dtos/ValidarCodigoInput';
@@ -31,6 +32,7 @@ export class TrilhasController {
     @Inject('IBadgeRepository')
     private readonly badgeRepository: IBadgeRepository,
     private readonly listarInscricoesUseCase: ListarInscricoesUseCase,
+    private readonly requestContext: TrilhaRequestContext,
   ) {}
 
   // ─── CRUD TRILHA ──────────────────────────────────────────────────────────
@@ -57,7 +59,9 @@ export class TrilhasController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   async finalizar(@Param('id') trilhaId: string, @Request() req: JwtRequest) {
-    await this.trilhaFacade.finalizar(trilhaId, req.user.userId);
+    await this.requestContext.run(req.user.userId, () =>
+      this.trilhaFacade.finalizar(trilhaId, req.user.userId),
+    );
     return { mensagem: 'Trilha finalizada com sucesso.' };
   }
 
