@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  Inject,
-  ForbiddenException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { ITrilhaRepository } from '../../domain/interfaces/ITrilhaRepository';
 import { IInscricaoRepository } from '../../../inscricoes/domain/interfaces/IInscricaoRepository';
 import { TrilhaEventEmitter } from '../../domain/observers/TrilhaEventEmitter';
@@ -21,12 +16,8 @@ export class FinalizarTrilhaUseCase {
   async execute(trilhaId: string, organizadorId: string): Promise<void> {
     const trilha = await this.trilhaRepository.findById(trilhaId);
     if (!trilha) throw new NotFoundException('Trilha não encontrada');
-    if (trilha.organizadorId !== organizadorId) {
-      throw new ForbiddenException(
-        'Apenas o organizador pode finalizar a trilha',
-      );
-    }
 
+    // Autorização verificada pelo TrilhaProxyRepository (Protection Proxy)
     trilha.finalizar();
     await this.trilhaRepository.save(trilha);
 
