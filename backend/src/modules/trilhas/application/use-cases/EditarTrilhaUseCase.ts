@@ -1,6 +1,7 @@
 import { Injectable, Inject, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { ITrilhaRepository } from '../../domain/interfaces/ITrilhaRepository';
 import { EditarTrilhaCommand } from '../../domain/commands/EditarTrilhaCommand';
+import { TrilhaCaretaker } from '../../domain/memento/TrilhaCaretaker';
 import { Trilha } from '../../domain/entities/Trilha';
 import { EditarTrilhaInput } from '../dtos/EditarTrilhaInput';
 
@@ -9,6 +10,7 @@ export class EditarTrilhaUseCase {
   constructor(
     @Inject('ITrilhaRepository')
     private readonly trilhaRepository: ITrilhaRepository,
+    private readonly caretaker: TrilhaCaretaker,
   ) {}
 
   async execute(trilhaId: string, organizadorId: string, input: EditarTrilhaInput): Promise<Trilha> {
@@ -18,6 +20,8 @@ export class EditarTrilhaUseCase {
     if (trilha.organizadorId !== organizadorId) {
       throw new ForbiddenException('Apenas o organizador pode editar a trilha');
     }
+
+    this.caretaker.save(trilhaId, trilha.saveState());
 
     const cmd = new EditarTrilhaCommand(trilha, {
       titulo: input.titulo,

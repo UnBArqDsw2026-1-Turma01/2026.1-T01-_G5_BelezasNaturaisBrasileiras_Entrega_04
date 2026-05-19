@@ -34,8 +34,7 @@ export class FazerCheckinUseCase {
       throw new ForbiddenException('Apenas o organizador pode fazer check-in');
     }
 
-    const codigoValido = this.confirmationCodeService.validarCodigo(codigo);
-    if (!codigoValido || inscricao.codigoConfirmacao !== codigo) {
+    if (inscricao.codigoConfirmacao !== codigo) {
       throw new BadRequestException('Código de confirmação inválido');
     }
 

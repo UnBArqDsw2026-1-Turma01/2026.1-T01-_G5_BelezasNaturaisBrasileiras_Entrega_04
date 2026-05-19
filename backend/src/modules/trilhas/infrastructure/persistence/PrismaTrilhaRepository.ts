@@ -28,9 +28,10 @@ export class PrismaTrilhaRepository implements ITrilhaRepository {
   }
 
   async save(trilha: Trilha): Promise<Trilha> {
+    const { id, createdAt, organizadorId, ...data } = TrilhaMapper.toPersistence(trilha);
     const raw = await this.prisma.trilha.update({
       where: { id: trilha.id },
-      data: { status: trilha.status },
+      data,
     });
     return TrilhaMapper.toDomain(raw);
   }

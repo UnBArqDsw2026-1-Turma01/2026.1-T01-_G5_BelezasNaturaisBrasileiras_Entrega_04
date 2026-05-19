@@ -62,7 +62,9 @@ export class TrilhasController {
     @Body() body: EditarTrilhaInput,
     @Request() req: JwtRequest,
   ): Promise<Trilha> {
-    return this.trilhaFacade.editar(id, req.user.userId, body);
+    return this.requestContext.run(req.user.userId, () =>
+      this.trilhaFacade.editar(id, req.user.userId, body),
+    );
   }
 
   @Get(':id/inscricoes')
@@ -85,7 +87,9 @@ export class TrilhasController {
   @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   async restaurar(@Param('id') trilhaId: string, @Request() req: JwtRequest) {
-    const trilha = await this.trilhaFacade.restaurar(trilhaId, req.user.userId);
+    const trilha = await this.requestContext.run(req.user.userId, () =>
+      this.trilhaFacade.restaurar(trilhaId, req.user.userId),
+    );
     return { mensagem: 'Estado anterior da trilha restaurado.', trilha };
   }
 
