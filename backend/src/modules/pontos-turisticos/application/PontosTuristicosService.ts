@@ -38,6 +38,15 @@ export class PontosTuristicosService implements IPontosTuristicosService {
     return this.repository.deletar(id, usuarioId);
   }
 
+  async buscarPorId(id: string): Promise<any> {
+    if (this.repository) {
+      return this.repository.buscarPorId(id);
+    }
+    const ponto = this.storage.get(id);
+    if (!ponto) throw new NotFoundException('Ponto não encontrado');
+    return ponto;
+  }
+
   async buscarFeed(filtros: Record<string, any>): Promise<any[]> {
     if (this.repository) {
       return await this.buscarFeedRepo(filtros);

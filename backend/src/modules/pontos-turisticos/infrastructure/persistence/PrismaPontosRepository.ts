@@ -29,6 +29,17 @@ export class PrismaPontosRepository {
     return Object.keys(where).length > 0 ? where : undefined;
   }
 
+  async buscarPorId(id: string): Promise<any> {
+    try {
+      const client: any = (this.prisma as any).ponto;
+      if (!client) throw new Error('Prisma model `ponto` não disponível');
+      return await client.findUnique({ where: { id } });
+    } catch (error) {
+      this.logger.error('Error finding ponto by id via Prisma', error as any);
+      throw error;
+    }
+  }
+
   async buscarFeed(filtros: Record<string, any>): Promise<any[]> {
     try {
       // Use dynamic access to avoid TypeScript errors if model not generated

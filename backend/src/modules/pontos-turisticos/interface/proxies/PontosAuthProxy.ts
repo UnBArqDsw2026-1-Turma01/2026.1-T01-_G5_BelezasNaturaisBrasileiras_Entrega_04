@@ -13,6 +13,10 @@ export class PontosAuthProxy implements IPontosTuristicosService {
     private readonly userRepository: IUserRepository,
   ) {}
 
+  async buscarPorId(id: string) {
+    return this.servico.buscarPorId(id);
+  }
+
   async buscarFeed(filtros: Record<string, any>) {
     // Feed é público — passa direto
     return this.servico.buscarFeed(filtros);

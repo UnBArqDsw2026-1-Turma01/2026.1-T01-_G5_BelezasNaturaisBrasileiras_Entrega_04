@@ -15,6 +15,11 @@ export class PontosTuristicosController {
     return this.service.buscarFeed(filtros || {});
   }
 
+  @Get(':id')
+  buscarPorId(@Param('id') id: string) {
+    return this.service.buscarPorId(id);
+  }
+
   @Post()
   criar(@Body() dados: any, @Headers('x-user-email') userEmail?: string) {
     const usuarioId = userEmail || 'extraído do JWT'; // header X-User-Email overrides JWT for testing

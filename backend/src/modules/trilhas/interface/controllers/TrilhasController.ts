@@ -147,4 +147,9 @@ export class TrilhasController {
       observadoresAtivos: this.trilhaEventEmitter.totalObservadores,
     };
   }
+
+  @Get(':id')
+  buscarPorId(@Param('id') id: string) {
+    return this.trilhaFacade.buscarPorId(id);
+  }
 }

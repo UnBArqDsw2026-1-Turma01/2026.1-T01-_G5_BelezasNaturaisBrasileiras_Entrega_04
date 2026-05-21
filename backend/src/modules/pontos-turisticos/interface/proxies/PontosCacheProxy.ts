@@ -9,6 +9,10 @@ export class PontosCacheProxy implements IPontosTuristicosService {
 
   constructor(private readonly proximo: IPontosTuristicosService) {}
 
+  async buscarPorId(id: string) {
+    return this.proximo.buscarPorId(id);
+  }
+
   async buscarFeed(filtros: Record<string, any>) {
     const chave = JSON.stringify(filtros || {});
     const entrada = this.cache.get(chave);

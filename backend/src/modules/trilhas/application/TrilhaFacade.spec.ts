@@ -46,7 +46,8 @@ describe('TrilhaFacade', () => {
     listarUC = { execute: jest.fn() } as any;
     finalizarUC = { execute: jest.fn() } as any;
 
-    facade = new TrilhaFacade(criarUC, listarUC, finalizarUC);
+    const repositoryMock = { findById: jest.fn(), findAll: jest.fn(), create: jest.fn(), save: jest.fn() } as any;
+    facade = new TrilhaFacade(criarUC, listarUC, finalizarUC, {} as any, {} as any, repositoryMock);
   });
 
   // ─── criar() ──────────────────────────────────────────────────────────────

@@ -44,7 +44,7 @@ export class CreateAccountUseCase {
       );
     }
 
-    const role = input.role || UserRole.COMMON_USER;
+    const role = UserRole.COMMON_USER;
     const factory = this.userFactoryRegistry.get(role);
     const user = factory.create(supabaseUser.uid, input.email, input.nome);
 
