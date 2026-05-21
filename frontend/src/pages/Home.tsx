@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Search, Plus, MapPin, Calendar, Users, AlertTriangle, Mountain } from 'lucide-react'
+import { Search, Plus, MapPin, Calendar, Users, AlertTriangle, Mountain, ArrowUpDown } from 'lucide-react'
 import { listarPontos } from '../api/pontos'
 import { listarTrilhas } from '../api/trilhas'
 import { useAuth } from '../contexts/AuthContext'
@@ -27,6 +27,7 @@ export default function Home() {
   const [pontos, setPontos] = useState<unknown[]>([])
   const [trilhas, setTrilhas] = useState<unknown[]>([])
   const [search, setSearch] = useState('')
+  const [ordenarPor, setOrdenarPor] = useState<'DATA' | 'TITULO'>('DATA')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -37,12 +38,12 @@ export default function Home() {
         .catch(() => setPontos([]))
         .finally(() => setLoading(false))
     } else {
-      listarTrilhas({ page: 1, limit: 20 })
+      listarTrilhas({ page: 1, pageSize: 20, ordenarPor })
         .then((r) => setTrilhas(r.data))
         .catch(() => setTrilhas([]))
         .finally(() => setLoading(false))
     }
-  }, [tab, search])
+  }, [tab, search, ordenarPor])
 
   const canCreatePonto = isAuthenticated                                              // RF03: qualquer usuário logado
   const canCreateTrilha = isAuthenticated && (user?.role === 'ORGANIZER' || user?.role === 'ADMIN')
@@ -83,7 +84,7 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Search + Create */}
+      {/* Search + Sort + Create */}
       <div className="flex gap-3 mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
@@ -94,6 +95,20 @@ export default function Home() {
             className="input pl-9"
           />
         </div>
+        {tab === 'trilhas' && (
+          <div className="relative">
+            <ArrowUpDown className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 pointer-events-none" />
+            <select
+              value={ordenarPor}
+              onChange={(e) => setOrdenarPor(e.target.value as 'DATA' | 'TITULO')}
+              className="input pl-9 pr-8 appearance-none cursor-pointer"
+              title="Ordenar por (Strategy)"
+            >
+              <option value="DATA">Data</option>
+              <option value="TITULO">Título</option>
+            </select>
+          </div>
+        )}
         {canCreatePonto && tab === 'pontos' && (
           <Link to="/pontos/criar" className="btn-green flex items-center gap-2 whitespace-nowrap">
             <Plus className="w-4 h-4" />

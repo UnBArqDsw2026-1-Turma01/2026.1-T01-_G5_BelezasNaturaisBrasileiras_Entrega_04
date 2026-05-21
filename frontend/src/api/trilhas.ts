@@ -8,7 +8,7 @@ export interface CriarTrilhaPayload {
   vagasMaximas: number
 }
 
-export const listarTrilhas = (params?: { status?: string; page?: number; limit?: number }) =>
+export const listarTrilhas = (params?: { status?: string; page?: number; pageSize?: number; ordenarPor?: 'DATA' | 'TITULO' }) =>
   api.get('/trilhas', { params })
 
 export const buscarTrilha = (id: string) =>
