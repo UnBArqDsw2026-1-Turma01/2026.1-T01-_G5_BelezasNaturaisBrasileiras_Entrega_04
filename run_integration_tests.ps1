@@ -200,11 +200,23 @@ Run-Step "27b. ADAPTER DE NOTIFICAÇÃO (WhatsApp)" "POST" "/adapters/notify/wha
 # 28. ADAPTER DE AUTENTICAÇÃO
 Run-Step "28. ADAPTER DE AUTENTICAÇÃO" "POST" "/adapters/auth/validate" @{} @{ sub = "google-uid-organizador"; email = $emailOrg }
 
-# 29. DELETAR PONTO TURÍSTICO (Mediator)
-Run-Step "29. DELETAR PONTO TURÍSTICO (Mediator)" "DELETE" "/pontos-turisticos/$PONTO_ID" @{ "x-user-email" = $emailAdmin } $null
+# 29. FINALIZAR PONTO TURÍSTICO (Mediator — orquestra 4 handlers)
+Run-Step "29. FINALIZAR PONTO TURÍSTICO (Mediator)" "POST" "/pontos-turisticos/$PONTO_ID/finalizar" @{ "x-user-id" = $emailAdmin } $null
 
-# 30. VALIDAR PERSISTÊNCIA DE LOGS E CICLO DE VIDA (Diferencial)
-Run-Step "30. VALIDAR PERSISTÊNCIA DE LOGS E CICLO DE VIDA" "GET" "/debug/stats" @{} $null
+# 30. DELETAR PONTO TURÍSTICO (Proxy — somente ADMIN pode deletar)
+Run-Step "30. DELETAR PONTO TURÍSTICO (Proxy)" "DELETE" "/pontos-turisticos/$PONTO_ID" @{ "x-user-email" = $emailAdmin } $null
+
+# 31. PROMOVER USUÁRIO (RolesGuard + Prototype — user.clone com nova role)
+$loginAdmin = Run-Step "31a. LOGIN DO ADMIN" "POST" "/accounts/login" @{} @{
+    email = $emailAdmin
+    password = "Senha@123"
+}
+$TOKEN_ADMIN = $loginAdmin.access_token
+$headersAdmin = @{ Authorization = "Bearer $TOKEN_ADMIN" }
+Run-Step "31b. PROMOVER PARTICIPANTE PARA ORGANIZER (Prototype)" "POST" "/accounts/promote" $headersAdmin @{
+    email = $emailPart
+    newRole = "ORGANIZER"
+}
 
 # --- RELATÓRIO FINAL ---
 Write-Host "`n========================================" -ForegroundColor Magenta
