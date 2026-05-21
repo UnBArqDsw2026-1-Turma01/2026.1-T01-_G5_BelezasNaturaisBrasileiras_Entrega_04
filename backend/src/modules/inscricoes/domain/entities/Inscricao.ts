@@ -9,6 +9,7 @@ export class Inscricao {
   solicitadoEm: Date;
   aceitoEm: Date | null;
   checkinEm: Date | null;
+  usuarioNome?: string;
 
   constructor(
     id: string,
@@ -19,6 +20,7 @@ export class Inscricao {
     solicitadoEm: Date = new Date(),
     aceitoEm: Date | null = null,
     checkinEm: Date | null = null,
+    usuarioNome?: string,
   ) {
     this.id = id;
     this.trilhaId = trilhaId;
@@ -28,6 +30,7 @@ export class Inscricao {
     this.solicitadoEm = solicitadoEm;
     this.aceitoEm = aceitoEm;
     this.checkinEm = checkinEm;
+    this.usuarioNome = usuarioNome;
   }
 
   aceitar(codigo: string): void {

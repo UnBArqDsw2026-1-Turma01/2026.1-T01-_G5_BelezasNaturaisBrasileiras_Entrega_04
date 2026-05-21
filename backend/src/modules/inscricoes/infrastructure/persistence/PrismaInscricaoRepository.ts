@@ -22,7 +22,10 @@ export class PrismaInscricaoRepository implements IInscricaoRepository {
   }
 
   async findByTrilhaId(trilhaId: string): Promise<Inscricao[]> {
-    const raws = await this.prisma.inscricao.findMany({ where: { trilhaId } });
+    const raws = await this.prisma.inscricao.findMany({
+      where: { trilhaId },
+      include: { usuario: { select: { nome: true } } },
+    });
     return raws.map((r) => InscricaoMapper.toDomain(r));
   }
 
