@@ -25,8 +25,4 @@ export class CreateAccountInput {
 
   @IsBoolean()
   aceitouTermos!: boolean;
-
-  @IsOptional()
-  @IsEnum(UserRole)
-  role?: UserRole;
 }
