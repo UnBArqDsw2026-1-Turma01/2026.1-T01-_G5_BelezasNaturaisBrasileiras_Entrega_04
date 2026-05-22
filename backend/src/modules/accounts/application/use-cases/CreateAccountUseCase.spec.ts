@@ -1,6 +1,7 @@
 import { ConflictException } from '@nestjs/common';
 import { CreateAccountUseCase } from './CreateAccountUseCase';
 import { CreateAccountInput } from '../dtos/CreateAccountInput';
+import { UserRole } from '../../domain/entities/User';
 
 const makeInput = (): CreateAccountInput => ({
   email: 'user@test.com',
@@ -55,6 +56,13 @@ describe('CreateAccountUseCase', () => {
     const result = await useCase.execute(makeInput());
     expect(result.email).toBe('user@test.com');
     expect(mockSupabase.createUser).toHaveBeenCalledWith('user@test.com', 'Senha123');
+    expect(mockFactoryRegistry.get).toHaveBeenCalledWith(UserRole.COMMON_USER);
+  });
+
+  it('should create account with requested role when provided', async () => {
+    await useCase.execute({ ...makeInput(), role: UserRole.ORGANIZER });
+
+    expect(mockFactoryRegistry.get).toHaveBeenCalledWith(UserRole.ORGANIZER);
   });
 
   it('should throw ConflictException when email already exists (chain stops before Supabase)', async () => {

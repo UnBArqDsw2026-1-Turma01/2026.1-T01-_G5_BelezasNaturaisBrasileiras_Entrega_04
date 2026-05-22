@@ -1,4 +1,12 @@
-import { IsBoolean, IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  MinLength,
+} from 'class-validator';
+import { UserRole } from '../../domain/entities/User';
 
 export class CreateAccountInput {
   @IsEmail()
@@ -10,6 +18,10 @@ export class CreateAccountInput {
 
   @IsNotEmpty()
   nome!: string;
+
+  @IsOptional()
+  @IsEnum(UserRole)
+  role?: UserRole;
 
   @IsBoolean()
   aceitouTermos!: boolean;

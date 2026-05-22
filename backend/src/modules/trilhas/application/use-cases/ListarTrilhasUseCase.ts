@@ -4,12 +4,14 @@ import { Trilha } from '../../domain/entities/Trilha';
 import { TrilhaFilteredIterator } from '../../domain/iterators/TrilhaFilteredIterator';
 import { TrilhaPaginatedIterator } from '../../domain/iterators/TrilhaPaginatedIterator';
 import { ListarTrilhasInput } from '../dtos/ListarTrilhasInput';
+import { TrilhaOrdenacaoContext } from '../../domain/strategies/TrilhaOrdenacaoContext';
 
 @Injectable()
 export class ListarTrilhasUseCase {
   constructor(
     @Inject('ITrilhaRepository')
     private readonly trilhaRepository: ITrilhaRepository,
+    private readonly ordenacaoContext: TrilhaOrdenacaoContext,
   ) {}
 
   async execute(input: ListarTrilhasInput = {}): Promise<Trilha[]> {
@@ -18,9 +20,11 @@ export class ListarTrilhasUseCase {
     const result: Trilha[] = [];
     while (filtered.hasNext()) result.push(filtered.next());
 
+    const ordered = this.ordenacaoContext.ordenar(result, input.ordenarPor);
+
     if (input.page !== undefined && input.pageSize !== undefined) {
       const paginated = new TrilhaPaginatedIterator(
-        result,
+        ordered,
         input.page,
         input.pageSize,
       );
@@ -29,6 +33,6 @@ export class ListarTrilhasUseCase {
       return page;
     }
 
-    return result;
+    return ordered;
   }
 }

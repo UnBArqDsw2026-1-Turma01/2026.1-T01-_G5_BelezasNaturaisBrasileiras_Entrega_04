@@ -1,15 +1,21 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ITrilhaObserver } from '../interfaces/ITrilhaObserver';
+import { LoggerNotificationChannel } from '../notifications/LoggerNotificationChannel';
+import { TrilhaFinalizadaNotification } from '../notifications/TrilhaFinalizadaNotification';
 
 @Injectable()
 export class NotificacaoObserver implements ITrilhaObserver {
-  private readonly logger = new Logger(NotificacaoObserver.name);
+  constructor(private readonly channel: LoggerNotificationChannel) {}
 
-  async onTrilhaFinalizada(trilhaId: string, participanteIds: string[]): Promise<void> {
-    participanteIds.forEach((participanteId) => {
-      this.logger.log(
-        `Notificação enviada: participante=${participanteId} — Trilha ${trilhaId} finalizada. Badge disponível no seu perfil!`,
-      );
-    });
+  async onTrilhaFinalizada(
+    trilhaId: string,
+    participanteIds: string[],
+  ): Promise<void> {
+    const notificacao = new TrilhaFinalizadaNotification(
+      this.channel,
+      trilhaId,
+    );
+
+    await notificacao.notify(participanteIds);
   }
 }

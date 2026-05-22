@@ -18,6 +18,7 @@ export const userFactoryProviders: Provider[] = [
     ) => {
       const registry = new UserFactoryRegistry();
       registry.register(UserRole.COMMON_USER, commonUserFactory);
+      registry.register(UserRole.COMMON, commonUserFactory);
       registry.register(UserRole.ORGANIZER, organizerUserFactory);
       registry.register(UserRole.ADMIN, adminUserFactory);
       return registry;

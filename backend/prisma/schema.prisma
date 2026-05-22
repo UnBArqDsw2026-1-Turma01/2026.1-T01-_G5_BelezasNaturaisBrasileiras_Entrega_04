@@ -28,6 +28,82 @@ model User {
   @@map("users")
 }
 
+model Ponto {
+  id        String   @id @default(uuid())
+  titulo    String
+  descricao String?
+  criadoPor String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("pontos")
+}
+
+// New models for chat, adapters and mediator
+model ChatSession {
+  id           String   @id @default(uuid())
+  userAId      String
+  userBId      String
+  connectionId String?
+  startedAt    DateTime @default(now())
+  endedAt      DateTime?
+
+  @@map("chat_sessions")
+}
+
+model ChatActivity {
+  id            String   @id @default(uuid())
+  chatSessionId String
+  payload       Json
+  createdAt     DateTime @default(now())
+
+  @@map("chat_activity")
+}
+
+model ExternalProvider {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  provider  String
+  config    Json
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("external_providers")
+}
+
+model NotificationLog {
+  id         String   @id @default(uuid())
+  to         String
+  provider   String
+  status     String
+  externalId String?
+  payload    Json?
+  createdAt  DateTime @default(now())
+
+  @@map("notification_logs")
+}
+
+model TrailLifecycleEvent {
+  id          String   @id @default(uuid())
+  trailId     String
+  eventType   String
+  payload     Json?
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+  processedAt DateTime?
+
+  @@map("trail_lifecycle_events")
+}
+
+model TrailSagaState {
+  id        String   @id @default(uuid())
+  state     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("trail_saga_states")
+}
+
 model Trilha {
   id            String      @id @default(uuid())
   titulo        String

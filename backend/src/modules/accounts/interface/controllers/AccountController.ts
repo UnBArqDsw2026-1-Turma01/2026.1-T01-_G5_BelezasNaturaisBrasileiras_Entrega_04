@@ -9,6 +9,9 @@ import {
 import { CreateAccountUseCase } from '../../application/use-cases/CreateAccountUseCase';
 import { CreateAccountInput } from '../../application/dtos/CreateAccountInput';
 import { CreateAccountOutput } from '../../application/dtos/CreateAccountOutput';
+import { LoginUseCase } from '../../application/use-cases/LoginUseCase';
+import { LoginInput } from '../../application/dtos/LoginInput';
+import { LoginOutput } from '../../application/dtos/LoginOutput';
 import { PromoteUserUseCase } from '../../application/use-cases/PromoteUserUseCase';
 import { PromoteUserInput } from '../../application/dtos/PromoteUserInput';
 import { PromoteUserOutput } from '../../application/dtos/PromoteUserOutput';
@@ -21,6 +24,7 @@ import { Role } from '../../auth/enums/role.enum';
 export class AccountController {
   constructor(
     private createAccountUseCase: CreateAccountUseCase,
+    private loginUseCase: LoginUseCase,
     private promoteUserUseCase: PromoteUserUseCase,
   ) {}
 
@@ -36,6 +40,12 @@ export class AccountController {
         error instanceof Error ? error.message : String(error),
       );
     }
+  }
+
+  @Post('login')
+  @HttpCode(200)
+  async login(@Body() input: LoginInput): Promise<LoginOutput> {
+    return await this.loginUseCase.execute(input);
   }
 
   @Post('promote')

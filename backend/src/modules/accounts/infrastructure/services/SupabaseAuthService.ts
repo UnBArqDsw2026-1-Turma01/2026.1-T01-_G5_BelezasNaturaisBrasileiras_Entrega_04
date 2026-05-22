@@ -19,6 +19,22 @@ export class SupabaseAuthService implements ISupabaseAuthService {
     return { uid: data.user!.id };
   }
 
+  async signIn(email: string, password: string): Promise<{ access_token: string; uid: string }> {
+    const { data, error } = await this.supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      throw error;
+    }
+
+    return { 
+      access_token: data.session!.access_token,
+      uid: data.user!.id
+    };
+  }
+
   async deleteUser(uid: string): Promise<void> {
     const { error } = await this.supabase.auth.admin.deleteUser(uid);
 

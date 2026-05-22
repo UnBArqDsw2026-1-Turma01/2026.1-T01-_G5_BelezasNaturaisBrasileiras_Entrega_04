@@ -2,6 +2,7 @@ import { IPrototype } from '../interfaces/IPrototype';
 
 export enum UserRole {
   COMMON_USER = 'COMMON_USER',
+  COMMON = 'COMMON',
   ORGANIZER = 'ORGANIZER',
   ADMIN = 'ADMIN',
 }

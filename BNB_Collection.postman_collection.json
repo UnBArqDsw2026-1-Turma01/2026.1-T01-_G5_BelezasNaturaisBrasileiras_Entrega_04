@@ -1,0 +1,681 @@
+{
+  "info": {
+    "name": "BelezasNaturaisBrasileiras — Fluxo Completo",
+    "_postman_id": "bnb-flow-2026",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl",        "value": "http://localhost:3000" },
+    { "key": "RAND",           "value": "" },
+    { "key": "EMAIL_ORG",      "value": "" },
+    { "key": "EMAIL_PART",     "value": "" },
+    { "key": "EMAIL_ADMIN",    "value": "" },
+    { "key": "TOKEN_ORG",      "value": "" },
+    { "key": "TOKEN_PART",     "value": "" },
+    { "key": "TOKEN_ADMIN",    "value": "" },
+    { "key": "TRILHA_ID",      "value": "" },
+    { "key": "INSCRICAO_ID",   "value": "" },
+    { "key": "CODIGO_CHECKIN", "value": "" },
+    { "key": "PONTO_ID",       "value": "" },
+    { "key": "SESSION_ID",     "value": "" }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "if (!pm.collectionVariables.get('RAND')) {",
+          "    const rand = Math.floor(Math.random() * 90000) + 10000;",
+          "    pm.collectionVariables.set('RAND', String(rand));",
+          "    pm.collectionVariables.set('EMAIL_ORG',   `org.${rand}@teste.com`);",
+          "    pm.collectionVariables.set('EMAIL_PART',  `part.${rand}@teste.com`);",
+          "    pm.collectionVariables.set('EMAIL_ADMIN', `admin.${rand}@teste.com`);",
+          "}"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "1 — Accounts",
+      "item": [
+        {
+          "name": "[1] Signup Organizador  |  Chain of Responsibility + Factory + Builder",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{EMAIL_ORG}}\",\n  \"password\": \"Senha@123\",\n  \"nome\": \"Organizador\",\n  \"role\": \"ORGANIZER\",\n  \"aceitouTermos\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/accounts/signup", "host": ["{{baseUrl}}"], "path": ["accounts", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));"
+          ]}}]
+        },
+        {
+          "name": "[2] Signup Participante  |  Chain of Responsibility + Factory + Builder",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{EMAIL_PART}}\",\n  \"password\": \"Senha@123\",\n  \"nome\": \"Participante\",\n  \"role\": \"COMMON_USER\",\n  \"aceitouTermos\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/accounts/signup", "host": ["{{baseUrl}}"], "path": ["accounts", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));"
+          ]}}]
+        },
+        {
+          "name": "[3] Signup Admin  |  Chain of Responsibility + Factory + Builder",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{EMAIL_ADMIN}}\",\n  \"password\": \"Senha@123\",\n  \"nome\": \"Admin\",\n  \"role\": \"ADMIN\",\n  \"aceitouTermos\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/accounts/signup", "host": ["{{baseUrl}}"], "path": ["accounts", "signup"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));"
+          ]}}]
+        },
+        {
+          "name": "[4] Login Organizador  |  LoginUseCase → JWT HS256",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{EMAIL_ORG}}\",\n  \"password\": \"Senha@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/accounts/login", "host": ["{{baseUrl}}"], "path": ["accounts", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('TOKEN_ORG', json.access_token);",
+            "pm.test('TOKEN_ORG salvo', () => pm.expect(json.access_token).to.be.a('string'));"
+          ]}}]
+        },
+        {
+          "name": "[5] Login Participante  |  LoginUseCase → JWT HS256",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{EMAIL_PART}}\",\n  \"password\": \"Senha@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/accounts/login", "host": ["{{baseUrl}}"], "path": ["accounts", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('TOKEN_PART', json.access_token);",
+            "pm.test('TOKEN_PART salvo', () => pm.expect(json.access_token).to.be.a('string'));"
+          ]}}]
+        },
+        {
+          "name": "[5b] Login Admin  |  LoginUseCase → JWT HS256",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{EMAIL_ADMIN}}\",\n  \"password\": \"Senha@123\"\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/accounts/login", "host": ["{{baseUrl}}"], "path": ["accounts", "login"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('TOKEN_ADMIN', json.access_token);",
+            "pm.test('TOKEN_ADMIN salvo', () => pm.expect(json.access_token).to.be.a('string'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "2 — Trilhas",
+      "item": [
+        {
+          "name": "[6] Criar Trilha  |  Facade + JwtAuthGuard + RolesGuard",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Chapada dos Veadeiros\",\n  \"descricao\": \"Trilha pelo cerrado goiano\",\n  \"pontoEncontro\": \"Portaria do Parque Nacional\",\n  \"dataInicio\": \"2026-07-15T08:00:00Z\",\n  \"vagasMaximas\": 20\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/trilhas", "host": ["{{baseUrl}}"], "path": ["trilhas"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('TRILHA_ID', json.id);",
+            "pm.test('TRILHA_ID salvo', () => pm.expect(json.id).to.be.a('string'));",
+            "pm.test('status ATIVA', () => pm.expect(json.status).to.eql('ATIVA'));"
+          ]}}]
+        },
+        {
+          "name": "[7] Listar Trilhas — paginado  |  Facade + Iterator paginado",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/trilhas?page=1&limit=10", "host": ["{{baseUrl}}"], "path": ["trilhas"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('retorna array', () => pm.expect(pm.response.json()).to.be.an('array'));"
+          ]}}]
+        },
+        {
+          "name": "[8] Listar Trilhas — filtrado  |  Facade + Iterator filtrado",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/trilhas?status=ATIVA&page=1&limit=5", "host": ["{{baseUrl}}"], "path": ["trilhas"], "query": [{ "key": "status", "value": "ATIVA" }, { "key": "page", "value": "1" }, { "key": "limit", "value": "5" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const arr = pm.response.json();",
+            "pm.test('todos com status ATIVA', () => arr.forEach(t => pm.expect(t.status).to.eql('ATIVA')));"
+          ]}}]
+        },
+        {
+          "name": "[9] Contar Pontos por Região  |  Composite",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"Goias\",\n  \"cidades\": [\n    { \"nome\": \"Alto Paraiso de Goias\", \"pontos\": [\"Vale da Lua\", \"Mirante do Parque\", \"Cachoeira Almecegas\"] },\n    { \"nome\": \"Cavalcante\", \"pontos\": [\"Cachoeira Santa Barbara\"] }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/trilhas/localizacao/pontos", "host": ["{{baseUrl}}"], "path": ["trilhas", "localizacao", "pontos"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('totalPontos = 4', () => pm.expect(pm.response.json().totalPontos).to.eql(4));"
+          ]}}]
+        },
+        {
+          "name": "[10] Gerar Código  |  Singleton",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/trilhas/codigos/gerar", "host": ["{{baseUrl}}"], "path": ["trilhas", "codigos", "gerar"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('CODIGO_DEMO', json.codigo);",
+            "pm.test('codigo gerado', () => pm.expect(json.codigo).to.be.a('string').with.lengthOf(8));"
+          ]}}]
+        },
+        {
+          "name": "[11] Validar Código  |  Singleton",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{CODIGO_DEMO}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/trilhas/codigos/validar", "host": ["{{baseUrl}}"], "path": ["trilhas", "codigos", "validar"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('valido = true', () => pm.expect(pm.response.json().valido).to.be.true);"
+          ]}}]
+        },
+        {
+          "name": "[12] Status Singleton  |  Singleton",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/trilhas/status", "host": ["{{baseUrl}}"], "path": ["trilhas", "status"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('campos presentes', () => {",
+            "    const j = pm.response.json();",
+            "    pm.expect(j).to.have.property('codigosAtivos');",
+            "    pm.expect(j).to.have.property('observadoresAtivos');",
+            "});"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "3 — Inscrições",
+      "item": [
+        {
+          "name": "[13] Solicitar Inscrição  |  InscricaoFacade + JwtAuthGuard",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_PART}}" }],
+            "url": { "raw": "{{baseUrl}}/inscricoes/trilha/{{TRILHA_ID}}", "host": ["{{baseUrl}}"], "path": ["inscricoes", "trilha", "{{TRILHA_ID}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('INSCRICAO_ID', json.id);",
+            "pm.test('status PENDENTE', () => pm.expect(json.status).to.eql('PENDENTE'));"
+          ]}}]
+        },
+        {
+          "name": "[14] Listar Inscrições da Trilha  |  JwtAuthGuard",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }],
+            "url": { "raw": "{{baseUrl}}/trilhas/{{TRILHA_ID}}/inscricoes", "host": ["{{baseUrl}}"], "path": ["trilhas", "{{TRILHA_ID}}", "inscricoes"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('retorna array', () => pm.expect(pm.response.json()).to.be.an('array').with.length.gte(1));"
+          ]}}]
+        },
+        {
+          "name": "[15] Aceitar Inscrição  |  InscricaoFacade + Singleton (gera código)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }],
+            "url": { "raw": "{{baseUrl}}/inscricoes/{{INSCRICAO_ID}}/aceitar", "host": ["{{baseUrl}}"], "path": ["inscricoes", "{{INSCRICAO_ID}}", "aceitar"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('CODIGO_CHECKIN', json.codigoConfirmacao);",
+            "pm.test('status ACEITA', () => pm.expect(json.status).to.eql('ACEITA'));",
+            "pm.test('CODIGO_CHECKIN salvo', () => pm.expect(json.codigoConfirmacao).to.be.a('string'));"
+          ]}}]
+        },
+        {
+          "name": "[16] Fazer Check-in  |  InscricaoFacade + Singleton (valida e revoga)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"{{CODIGO_CHECKIN}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/inscricoes/{{INSCRICAO_ID}}/checkin", "host": ["{{baseUrl}}"], "path": ["inscricoes", "{{INSCRICAO_ID}}", "checkin"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('status PRESENTE', () => pm.expect(pm.response.json().status).to.eql('PRESENTE'));"
+          ]}}]
+        },
+        {
+          "name": "[17] Editar Trilha  |  Facade + Command + Memento + Proxy",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"titulo\": \"Chapada Editada\",\n  \"vagasMaximas\": 30\n}" },
+            "url": { "raw": "{{baseUrl}}/trilhas/{{TRILHA_ID}}", "host": ["{{baseUrl}}"], "path": ["trilhas", "{{TRILHA_ID}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('titulo editado', () => pm.expect(pm.response.json().titulo).to.eql('Chapada Editada'));",
+            "pm.test('vagasMaximas = 30', () => pm.expect(pm.response.json().vagasMaximas).to.eql(30));"
+          ]}}]
+        },
+        {
+          "name": "[18] Restaurar Estado  |  Facade + Memento (caretaker.restore)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }],
+            "url": { "raw": "{{baseUrl}}/trilhas/{{TRILHA_ID}}/restaurar", "host": ["{{baseUrl}}"], "path": ["trilhas", "{{TRILHA_ID}}", "restaurar"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('titulo restaurado', () => pm.expect(pm.response.json().trilha.titulo).to.eql('Chapada dos Veadeiros'));",
+            "pm.test('vagasMaximas restaurado', () => pm.expect(pm.response.json().trilha.vagasMaximas).to.eql(20));"
+          ]}}]
+        },
+        {
+          "name": "[19] Finalizar Trilha  |  Facade + Memento + Mediator + Observer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }],
+            "url": { "raw": "{{baseUrl}}/trilhas/{{TRILHA_ID}}/finalizar", "host": ["{{baseUrl}}"], "path": ["trilhas", "{{TRILHA_ID}}", "finalizar"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('mensagem de sucesso', () => pm.expect(pm.response.json().mensagem).to.include('finalizada'));"
+          ]}}]
+        },
+        {
+          "name": "[20] Ver Badges  |  Observer — BadgeDistribuicaoObserver",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_PART}}" }],
+            "url": { "raw": "{{baseUrl}}/trilhas/badges/minhas", "host": ["{{baseUrl}}"], "path": ["trilhas", "badges", "minhas"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('badge recebido', () => pm.expect(pm.response.json()).to.be.an('array').with.length.gte(1));"
+          ]}}]
+        },
+        {
+          "name": "[21] Minhas Inscrições  |  InscricaoFacade",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{TOKEN_PART}}" }],
+            "url": { "raw": "{{baseUrl}}/inscricoes/minhas", "host": ["{{baseUrl}}"], "path": ["inscricoes", "minhas"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('status PRESENTE', () => pm.expect(pm.response.json()[0].status).to.eql('PRESENTE'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "4 — Pontos Turísticos",
+      "item": [
+        {
+          "name": "[22] Criar Ponto  |  Proxy (Auth + Cache)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "x-user-email",  "value": "{{EMAIL_ORG}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"titulo\": \"Cachoeira dos Cristais\",\n  \"descricao\": \"Aguas cristalinas no cerrado goiano\"\n}" },
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('PONTO_ID', json.id);",
+            "pm.test('PONTO_ID salvo', () => pm.expect(json.id).to.be.a('string'));"
+          ]}}]
+        },
+        {
+          "name": "[23] Listar Pontos — Cache MISS  |  Cache Proxy",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('retorna array', () => pm.expect(pm.response.json()).to.be.an('array'));"
+          ]}}]
+        },
+        {
+          "name": "[24] Listar Pontos — Cache HIT  |  Cache Proxy",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));"
+          ]}}]
+        },
+        {
+          "name": "[25] Busca Filtrada  |  Cache Proxy",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos?titulo=Cachoeira%20dos%20Cristais", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos"], "query": [{ "key": "titulo", "value": "Cachoeira dos Cristais" }] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('filtro aplicado', () => pm.expect(pm.response.json()).to.be.an('array').with.length.gte(1));"
+          ]}}]
+        },
+        {
+          "name": "[26] Editar Ponto  |  Protection Proxy (verifica criador)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-user-email", "value": "{{EMAIL_ORG}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"titulo\": \"Cachoeira dos Cristais - Trilha Longa\",\n  \"descricao\": \"Percurso completo de 12 km\"\n}" },
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos/{{PONTO_ID}}", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos", "{{PONTO_ID}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('titulo editado', () => pm.expect(pm.response.json().titulo).to.include('Trilha Longa'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "5 — Chat / Object Pool",
+      "item": [
+        {
+          "name": "[27] Pool Status  |  Object Pool",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/chat/pool/status", "host": ["{{baseUrl}}"], "path": ["chat", "pool", "status"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('poolSize presente', () => pm.expect(pm.response.json()).to.have.property('poolSize'));"
+          ]}}]
+        },
+        {
+          "name": "[28] Iniciar Sessão de Chat  |  Object Pool",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"userAId\": \"{{EMAIL_ORG}}\",\n  \"userBId\": \"{{EMAIL_PART}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/chat/sessions", "host": ["{{baseUrl}}"], "path": ["chat", "sessions"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "const json = pm.response.json();",
+            "pm.collectionVariables.set('SESSION_ID', json.id);",
+            "pm.test('SESSION_ID salvo', () => pm.expect(json.id).to.be.a('string'));"
+          ]}}]
+        },
+        {
+          "name": "[29] Enviar Mensagem  |  Object Pool (acquire + release)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"message\": \"Confirmado presença na trilha?\"\n}" },
+            "url": { "raw": "{{baseUrl}}/chat/sessions/{{SESSION_ID}}/messages", "host": ["{{baseUrl}}"], "path": ["chat", "sessions", "{{SESSION_ID}}", "messages"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('delivered = true', () => pm.expect(pm.response.json().delivered).to.be.true);"
+          ]}}]
+        },
+        {
+          "name": "[30] Encerrar Sessão  |  Object Pool",
+          "request": {
+            "method": "DELETE",
+            "url": { "raw": "{{baseUrl}}/chat/sessions/{{SESSION_ID}}", "host": ["{{baseUrl}}"], "path": ["chat", "sessions", "{{SESSION_ID}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('endedAt preenchido', () => pm.expect(pm.response.json().endedAt).to.not.be.null);"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "6 — Adapters",
+      "item": [
+        {
+          "name": "[31] Adapter Info  |  Adapter (Structural GoF)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/adapters/info", "host": ["{{baseUrl}}"], "path": ["adapters", "info"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('GoogleMapsAdapter presente', () => pm.expect(pm.response.json().adapters.map).to.eql('GoogleMapsAdapter'));"
+          ]}}]
+        },
+        {
+          "name": "[32] Geocode  |  Adapter — GoogleMapsAdapter → IMapAdapter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"address\": \"Chapada dos Veadeiros, Alto Paraiso de Goias, GO\"\n}" },
+            "url": { "raw": "{{baseUrl}}/adapters/geocode", "host": ["{{baseUrl}}"], "path": ["adapters", "geocode"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('lat e lng presentes', () => { const j = pm.response.json(); pm.expect(j).to.have.property('lat'); pm.expect(j).to.have.property('lng'); });"
+          ]}}]
+        },
+        {
+          "name": "[33] Route  |  Adapter — GoogleMapsAdapter → IMapAdapter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"from\": { \"lat\": -14.13, \"lng\": -47.51 },\n  \"to\":   { \"lat\": -13.99, \"lng\": -47.49 }\n}" },
+            "url": { "raw": "{{baseUrl}}/adapters/route", "host": ["{{baseUrl}}"], "path": ["adapters", "route"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('distance presente', () => pm.expect(pm.response.json()).to.have.property('distance'));"
+          ]}}]
+        },
+        {
+          "name": "[34] SMS  |  Adapter — TwilioAdapter → INotificationAdapter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"to\": \"+5561999999999\",\n  \"message\": \"Sua inscrição foi confirmada!\"\n}" },
+            "url": { "raw": "{{baseUrl}}/adapters/notify/sms", "host": ["{{baseUrl}}"], "path": ["adapters", "notify", "sms"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('success = true', () => pm.expect(pm.response.json().success).to.be.true);"
+          ]}}]
+        },
+        {
+          "name": "[35] WhatsApp  |  Adapter — TwilioAdapter → INotificationAdapter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"to\": \"+5561999999999\",\n  \"message\": \"Trilha começa às 08h na Portaria.\"\n}" },
+            "url": { "raw": "{{baseUrl}}/adapters/notify/whatsapp", "host": ["{{baseUrl}}"], "path": ["adapters", "notify", "whatsapp"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('success = true', () => pm.expect(pm.response.json().success).to.be.true);"
+          ]}}]
+        },
+        {
+          "name": "[36] OAuth Callback  |  Adapter — GoogleAuthAdapter → IAuthAdapter",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"sub\": \"google-uid-xyz\",\n  \"email\": \"{{EMAIL_ORG}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/adapters/auth/validate", "host": ["{{baseUrl}}"], "path": ["adapters", "auth", "validate"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('userId presente', () => pm.expect(pm.response.json()).to.have.property('userId'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "7 — Mediator + Admin",
+      "item": [
+        {
+          "name": "[37] Finalizar Ponto  |  Mediator (4 handlers)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "x-user-id", "value": "{{EMAIL_ADMIN}}" }],
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos/{{PONTO_ID}}/finalizar", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos", "{{PONTO_ID}}", "finalizar"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('201 Created', () => pm.response.to.have.status(201));",
+            "pm.test('success = true', () => pm.expect(pm.response.json().success).to.be.true);",
+            "pm.test('sem erros', () => pm.expect(pm.response.json().errors).to.be.empty);"
+          ]}}]
+        },
+        {
+          "name": "[38] Deletar Ponto  |  Protection Proxy (somente ADMIN)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-user-email", "value": "{{EMAIL_ADMIN}}" }],
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos/{{PONTO_ID}}", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos", "{{PONTO_ID}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('mensagem de remoção', () => pm.expect(pm.response.json().message).to.include('removido'));"
+          ]}}]
+        },
+        {
+          "name": "[39] Promover Usuário  |  RolesGuard (ADMIN) + Prototype (user.clone)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{TOKEN_ADMIN}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"{{EMAIL_PART}}\",\n  \"newRole\": \"ORGANIZER\"\n}" },
+            "url": { "raw": "{{baseUrl}}/accounts/promote", "host": ["{{baseUrl}}"], "path": ["accounts", "promote"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 OK', () => pm.response.to.have.status(200));",
+            "pm.test('role promovida', () => pm.expect(pm.response.json().role).to.eql('ORGANIZER'));"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "8 — Testes Negativos",
+      "item": [
+        {
+          "name": "[F1] Organizer tenta deletar ponto → 403  |  PontosAuthProxy (exige ADMIN)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "x-user-email", "value": "{{EMAIL_ORG}}" }],
+            "url": { "raw": "{{baseUrl}}/pontos-turisticos/{{PONTO_ID}}", "host": ["{{baseUrl}}"], "path": ["pontos-turisticos", "{{PONTO_ID}}"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('NEGATIVO: 403 Forbidden', () => pm.response.to.have.status(403));"
+          ]}}]
+        },
+        {
+          "name": "[F2] COMMON_USER tenta criar trilha → 403  |  RolesGuard",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{TOKEN_PART}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"titulo\": \"Trilha Proibida\",\n  \"descricao\": \"Nao deve ser criada\",\n  \"pontoEncontro\": \"N/A\",\n  \"dataInicio\": \"2026-08-01T08:00:00Z\",\n  \"vagasMaximas\": 10\n}" },
+            "url": { "raw": "{{baseUrl}}/trilhas", "host": ["{{baseUrl}}"], "path": ["trilhas"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('NEGATIVO: 403 Forbidden', () => pm.response.to.have.status(403));"
+          ]}}]
+        },
+        {
+          "name": "[F3] Check-in com código errado → 400  |  FazerCheckinUseCase",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type",  "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{TOKEN_ORG}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"codigo\": \"INVALIDO\"\n}" },
+            "url": { "raw": "{{baseUrl}}/inscricoes/{{INSCRICAO_ID}}/checkin", "host": ["{{baseUrl}}"], "path": ["inscricoes", "{{INSCRICAO_ID}}", "checkin"] }
+          },
+          "event": [{ "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('NEGATIVO: 400 Bad Request', () => pm.response.to.have.status(400));"
+          ]}}]
+        }
+      ]
+    }
+  ]
+}

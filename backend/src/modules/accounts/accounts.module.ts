@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { AccountController } from './interface/controllers/AccountController';
 import { CreateAccountUseCase } from './application/use-cases/CreateAccountUseCase';
+import { LoginUseCase } from './application/use-cases/LoginUseCase';
 import { PromoteUserUseCase } from './application/use-cases/PromoteUserUseCase';
 import { PrismaUserRepository } from './infrastructure/persistence/PrismaUserRepository';
 import { SupabaseAuthService } from './infrastructure/services/SupabaseAuthService';
@@ -18,6 +19,7 @@ import { JwtStrategy } from './auth/strategies/jwt.strategy';
     JwtStrategy,
     supabaseProvider,
     CreateAccountUseCase,
+    LoginUseCase,
     PromoteUserUseCase,
     {
       provide: 'IUserRepository',

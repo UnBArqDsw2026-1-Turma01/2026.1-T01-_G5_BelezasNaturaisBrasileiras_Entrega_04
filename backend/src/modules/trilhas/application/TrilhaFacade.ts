@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { CriarTrilhaUseCase } from './use-cases/CriarTrilhaUseCase';
 import { ListarTrilhasUseCase } from './use-cases/ListarTrilhasUseCase';
 import { FinalizarTrilhaUseCase } from './use-cases/FinalizarTrilhaUseCase';
 import { RestaurarTrilhaUseCase } from './use-cases/RestaurarTrilhaUseCase';
 import { EditarTrilhaUseCase } from './use-cases/EditarTrilhaUseCase';
 import { Trilha } from '../domain/entities/Trilha';
+import { ITrilhaRepository } from '../domain/interfaces/ITrilhaRepository';
 import { CriarTrilhaInput } from './dtos/CriarTrilhaInput';
 import { EditarTrilhaInput } from './dtos/EditarTrilhaInput';
 import { ListarTrilhasInput } from './dtos/ListarTrilhasInput';
@@ -17,6 +18,7 @@ export class TrilhaFacade {
     private readonly finalizarUC: FinalizarTrilhaUseCase,
     private readonly restaurarUC: RestaurarTrilhaUseCase,
     private readonly editarUC: EditarTrilhaUseCase,
+    @Inject('ITrilhaRepository') private readonly repository: ITrilhaRepository,
   ) {}
 
   criar(organizadorId: string, input: CriarTrilhaInput): Promise<Trilha> {
@@ -41,5 +43,11 @@ export class TrilhaFacade {
     input: EditarTrilhaInput,
   ): Promise<Trilha> {
     return this.editarUC.execute(trilhaId, organizadorId, input);
+  }
+
+  async buscarPorId(id: string): Promise<Trilha> {
+    const trilha = await this.repository.findById(id);
+    if (!trilha) throw new NotFoundException(`Trilha ${id} não encontrada.`);
+    return trilha;
   }
 }

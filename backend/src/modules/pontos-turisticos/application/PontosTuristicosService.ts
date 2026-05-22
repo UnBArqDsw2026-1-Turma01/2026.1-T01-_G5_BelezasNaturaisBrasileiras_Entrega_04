@@ -1,0 +1,95 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import type { IPontosTuristicosService } from '../domain/interfaces/IPontosTuristicosService';
+import type { PrismaPontosRepository } from '../infrastructure/persistence/PrismaPontosRepository';
+
+interface PontoDTO {
+  id: string;
+  titulo?: string;
+  descricao?: string;
+  criadoPor?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  [key: string]: any;
+}
+
+@Injectable()
+export class PontosTuristicosService implements IPontosTuristicosService {
+  private readonly storage = new Map<string, PontoDTO>();
+
+  constructor(private readonly repository?: PrismaPontosRepository) {}
+
+  private async buscarFeedRepo(filtros: Record<string, any>) {
+    if (!this.repository) throw new Error('No repository');
+    return this.repository.buscarFeed(filtros);
+  }
+
+  private async criarRepo(dados: any, usuarioId: string) {
+    if (!this.repository) throw new Error('No repository');
+    return this.repository.criar(dados, usuarioId);
+  }
+
+  private async editarRepo(id: string, dados: any, usuarioId: string) {
+    if (!this.repository) throw new Error('No repository');
+    return this.repository.editar(id, dados, usuarioId);
+  }
+
+  private async deletarRepo(id: string, usuarioId: string) {
+    if (!this.repository) throw new Error('No repository');
+    return this.repository.deletar(id, usuarioId);
+  }
+
+  async buscarPorId(id: string): Promise<any> {
+    if (this.repository) {
+      return this.repository.buscarPorId(id);
+    }
+    const ponto = this.storage.get(id);
+    if (!ponto) throw new NotFoundException('Ponto não encontrado');
+    return ponto;
+  }
+
+  async buscarFeed(filtros: Record<string, any>): Promise<any[]> {
+    if (this.repository) {
+      return await this.buscarFeedRepo(filtros);
+    }
+
+    const all = Array.from(this.storage.values());
+    if (!filtros || Object.keys(filtros).length === 0) return all;
+
+    return all.filter((p) => {
+      return Object.entries(filtros).every(([k, v]) => p[k] === v);
+    });
+  }
+
+  async criar(dados: any, usuarioId: string): Promise<any> {
+    if (this.repository) {
+      return await this.criarRepo(dados, usuarioId);
+    }
+
+    const id = String(Date.now()) + Math.floor(Math.random() * 1000);
+    const registro: PontoDTO = { id, ...dados, criadoPor: usuarioId, createdAt: new Date(), updatedAt: new Date() };
+    this.storage.set(id, registro);
+    return registro;
+  }
+
+  async editar(id: string, dados: any, usuarioId: string): Promise<any> {
+    if (this.repository) {
+      return await this.editarRepo(id, dados, usuarioId);
+    }
+
+    const existing = this.storage.get(id);
+    if (!existing) throw new NotFoundException('Ponto não encontrado');
+    const atualizado = { ...existing, ...dados, updatedAt: new Date() };
+    this.storage.set(id, atualizado);
+    return atualizado;
+  }
+
+  async deletar(id: string, usuarioId: string): Promise<void> {
+    if (this.repository) {
+      return await this.deletarRepo(id, usuarioId);
+    }
+
+    const existing = this.storage.get(id);
+    if (!existing) throw new NotFoundException('Ponto não encontrado');
+    this.storage.delete(id);
+  }
+}

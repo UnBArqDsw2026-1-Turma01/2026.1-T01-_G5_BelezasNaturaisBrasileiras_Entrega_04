@@ -10,6 +10,7 @@ type InscricaoRaw = {
   solicitadoEm: Date;
   aceitoEm: Date | null;
   checkinEm: Date | null;
+  usuario?: { nome: string } | null;
 };
 
 export class InscricaoMapper {
@@ -23,10 +24,11 @@ export class InscricaoMapper {
       raw.solicitadoEm,
       raw.aceitoEm,
       raw.checkinEm,
+      raw.usuario?.nome,
     );
   }
 
-  static toPersistence(inscricao: Inscricao): InscricaoRaw {
+  static toPersistence(inscricao: Inscricao): Omit<InscricaoRaw, 'usuario'> {
     return {
       id: inscricao.id,
       trilhaId: inscricao.trilhaId,

@@ -1,1 +1,4 @@
+.env.local
+node_modules/
 .worktrees/
+main

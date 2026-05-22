@@ -18,3 +18,9 @@ prisma/migrations/dev.db-journal
 
 /src/generated/prisma
 generated/
+
+
+node_modules/
+dist/
+.env
+.env.local

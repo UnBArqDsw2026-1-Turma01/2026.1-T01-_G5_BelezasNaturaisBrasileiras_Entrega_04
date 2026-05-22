@@ -5,6 +5,8 @@ import { ConfirmationCodeService } from './domain/services/ConfirmationCodeServi
 import { TrilhaEventEmitter } from './domain/observers/TrilhaEventEmitter';
 import { BadgeDistribuicaoObserver } from './domain/observers/BadgeDistribuicaoObserver';
 import { NotificacaoObserver } from './domain/observers/NotificacaoObserver';
+import { BadgeDistribuicaoVisitor } from './domain/visitors/BadgeDistribuicaoVisitor';
+import { NotificacaoInscricaoVisitor } from './domain/visitors/NotificacaoInscricaoVisitor';
 import { PrismaTrilhaRepository } from './infrastructure/persistence/PrismaTrilhaRepository';
 import { CachedTrilhaRepository } from './infrastructure/persistence/CachedTrilhaRepository';
 import { AuditedTrilhaRepository } from './infrastructure/persistence/AuditedTrilhaRepository';
@@ -22,9 +24,18 @@ import { ListarInscricoesUseCase } from '../inscricoes/application/use-cases/Lis
 import { TrilhaFacade } from './application/TrilhaFacade';
 import { TrilhasController } from './interface/controllers/TrilhasController';
 import { TrilhaCaretaker } from './domain/memento/TrilhaCaretaker';
+import { TrailLifecycleModule } from '../pontos-turisticos/mediator/trail-lifecycle.module';
+import { LoggerNotificationChannel } from './domain/notifications/LoggerNotificationChannel';
+import { OrdenarTrilhasPorDataStrategy } from './domain/strategies/OrdenarTrilhasPorDataStrategy';
+import { OrdenarTrilhasPorTituloStrategy } from './domain/strategies/OrdenarTrilhasPorTituloStrategy';
+import { TrilhaOrdenacaoContext } from './domain/strategies/TrilhaOrdenacaoContext';
+import { ITrilhaRepository } from './domain/interfaces/ITrilhaRepository';
+import { IInscricaoRepository } from '../inscricoes/domain/interfaces/IInscricaoRepository';
+import { IInscricaoVisitor } from '../inscricoes/domain/interfaces/IInscricaoVisitor';
+import { ITrailLifecycleMediator } from '../pontos-turisticos/mediator/interfaces/trail-lifecycle-mediator.interface';
 
 @Module({
-  imports: [PassportModule],
+  imports: [PassportModule, TrailLifecycleModule],
   controllers: [TrilhasController],
   providers: [
     PrismaService,
@@ -51,12 +62,49 @@ import { TrilhaCaretaker } from './domain/memento/TrilhaCaretaker';
     { provide: 'IInscricaoRepository', useClass: PrismaInscricaoRepository },
     { provide: 'IBadgeRepository', useClass: PrismaBadgeRepository },
     TrilhaEventEmitter,
+    LoggerNotificationChannel,
     BadgeDistribuicaoObserver,
     NotificacaoObserver,
+    BadgeDistribuicaoVisitor,
+    NotificacaoInscricaoVisitor,
+    {
+      provide: 'IInscricaoVisitors',
+      useFactory: (
+        badge: BadgeDistribuicaoVisitor,
+        notif: NotificacaoInscricaoVisitor,
+      ) => [badge, notif],
+      inject: [BadgeDistribuicaoVisitor, NotificacaoInscricaoVisitor],
+    },
     TrilhaCaretaker,
+    OrdenarTrilhasPorDataStrategy,
+    OrdenarTrilhasPorTituloStrategy,
+    TrilhaOrdenacaoContext,
     CriarTrilhaUseCase,
     ListarTrilhasUseCase,
-    FinalizarTrilhaUseCase,
+    {
+      provide: FinalizarTrilhaUseCase,
+      useFactory: (
+        repo: ITrilhaRepository,
+        inscRepo: IInscricaoRepository,
+        caretaker: TrilhaCaretaker,
+        mediator: ITrailLifecycleMediator,
+        visitors: IInscricaoVisitor[],
+      ) =>
+        new FinalizarTrilhaUseCase(
+          repo,
+          inscRepo,
+          caretaker,
+          mediator,
+          visitors,
+        ),
+      inject: [
+        'ITrilhaRepository',
+        'IInscricaoRepository',
+        TrilhaCaretaker,
+        'ITrailLifecycleMediator',
+        'IInscricaoVisitors',
+      ],
+    },
     RestaurarTrilhaUseCase,
     EditarTrilhaUseCase,
     ListarInscricoesUseCase,

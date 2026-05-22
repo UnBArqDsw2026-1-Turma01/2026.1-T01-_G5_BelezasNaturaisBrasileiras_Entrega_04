@@ -1,4 +1,5 @@
 import { InscricaoStatus } from '../enums/InscricaoStatus';
+import { IInscricaoVisitor } from '../interfaces/IInscricaoVisitor';
 
 export class Inscricao {
   id: string;
@@ -9,6 +10,7 @@ export class Inscricao {
   solicitadoEm: Date;
   aceitoEm: Date | null;
   checkinEm: Date | null;
+  usuarioNome?: string;
 
   constructor(
     id: string,
@@ -19,6 +21,7 @@ export class Inscricao {
     solicitadoEm: Date = new Date(),
     aceitoEm: Date | null = null,
     checkinEm: Date | null = null,
+    usuarioNome?: string,
   ) {
     this.id = id;
     this.trilhaId = trilhaId;
@@ -28,6 +31,7 @@ export class Inscricao {
     this.solicitadoEm = solicitadoEm;
     this.aceitoEm = aceitoEm;
     this.checkinEm = checkinEm;
+    this.usuarioNome = usuarioNome;
   }
 
   aceitar(codigo: string): void {
@@ -52,5 +56,18 @@ export class Inscricao {
     }
     this.status = InscricaoStatus.PRESENTE;
     this.checkinEm = new Date();
+  }
+
+  async accept(visitor: IInscricaoVisitor): Promise<void> {
+    switch (this.status) {
+      case InscricaoStatus.PRESENTE:
+        return visitor.visitPresente(this);
+      case InscricaoStatus.ACEITA:
+        return visitor.visitAceita(this);
+      case InscricaoStatus.REJEITADA:
+        return visitor.visitRejeitada(this);
+      case InscricaoStatus.PENDENTE:
+        return visitor.visitPendente(this);
+    }
   }
 }
