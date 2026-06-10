@@ -58,3 +58,8 @@
     - [3.5.1. Frontend](PadroesDeProjeto/IniciativasExtras/3.5.1.Frontend.md)
     - [3.5.2. Testes](PadroesDeProjeto/IniciativasExtras/3.5.2.Testes.md)
   - [3.6. Vídeo de Demonstração](PadroesDeProjeto/3.6.VideoDemonstracao.md)
+- **Arquitetura de Software & Reutilização (Vale Até um Ponto na Média Ponderada - Vide Plano de Ensino)**
+  - [4. Desenho de Software (Arquitetura & Reutilização de Software)](/docs/ArquiteturaReutilizacao/4.ArquiteturaReutilizacao.md)
+    - [4.1. DAS](/docs/ArquiteturaReutilizacao/4.1.DAS.md)
+    - [4.2. Reutilização de Software](/docs/ArquiteturaReutilizacao/4.2.ReutilizacaoDeSoftware.md)
+    - [4.3. Participações - Arquitetura & Reutilização de Software](/docs/ArquiteturaReutilizacao/4.3.ParticipacoesArqReutilizacao.md)
