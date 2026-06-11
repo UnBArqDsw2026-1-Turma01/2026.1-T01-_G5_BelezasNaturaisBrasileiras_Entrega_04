@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <a href="https://unbarqdsw2026-1-turma01.github.io/2026.1-T01-_G5_BelezasNaturaisBrasileiras_Entrega_01/#/" target="_blank"><b>Acessar a Documentação Completa (GitHub Pages)</b></a>
+  <a href="https://unbarqdsw2026-1-turma01.github.io/2026.1-T01-_G5_BelezasNaturaisBrasileiras_Entrega_04/#/" target="_blank"><b>Acessar a Documentação Completa (GitHub Pages)</b></a>
 </p>
 
 **Disciplina:** Arquitetura e Desenho de Software  
