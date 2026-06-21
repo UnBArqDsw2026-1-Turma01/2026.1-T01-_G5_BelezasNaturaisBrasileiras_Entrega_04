@@ -90,8 +90,8 @@ describe('TwilioAdapter', () => {
         '+5561999999999',
         'Sua inscrição foi confirmada!',
       );
-      expect(result.success).toBe(true);
-      expect(result.externalId).toBeDefined();
+      expect(result!.success).toBe(true);
+      expect(result!.externalId).toBeDefined();
     });
   });
 
@@ -128,7 +128,7 @@ describe('NotificationAdapterService — Adapter', () => {
   it('deve delegar sendSMS() ao adaptador injetado', async () => {
     const result = await service.sendSMS('+5561999999999', 'msg');
     expect(mockAdapter.sendSMS).toHaveBeenCalledWith('+5561999999999', 'msg');
-    expect(result.success).toBe(true);
+    expect(result!.success).toBe(true);
   });
 
   it('deve delegar sendWhatsApp() ao adaptador injetado', async () => {
@@ -137,7 +137,7 @@ describe('NotificationAdapterService — Adapter', () => {
       '+5561999999999',
       'msg',
     );
-    expect(result.success).toBe(true);
+    expect(result!.success).toBe(true);
   });
 });
 

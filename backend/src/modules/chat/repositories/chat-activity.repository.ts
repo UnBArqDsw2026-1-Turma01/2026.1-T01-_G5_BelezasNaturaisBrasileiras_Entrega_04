@@ -6,13 +6,17 @@ export class ChatActivityRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   async logActivity(chatSessionId: string, payload: any) {
-    return this.prisma.chatActivity.create({ data: { chatSessionId, payload } });
+    const raw = await this.prisma.chatActivity.create({ data: { chatSessionId, payload } });
+    const { ChatActivityMapper } = require('../mappers/ChatActivityMapper');
+    return ChatActivityMapper.toDomain(raw);
   }
 
   async findBySessionId(chatSessionId: string) {
-    return this.prisma.chatActivity.findMany({
+    const raws = await this.prisma.chatActivity.findMany({
       where: { chatSessionId },
       orderBy: { createdAt: 'asc' },
     });
+    const { ChatActivityMapper } = require('../mappers/ChatActivityMapper');
+    return raws.map((r: any) => ChatActivityMapper.toDomain(r));
   }
 }

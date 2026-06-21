@@ -1,10 +1,11 @@
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { ReactNode } from 'react'
+import { User } from '../contexts/AuthContext'
 
 interface Props {
   children: ReactNode
-  roles?: string[]
+  roles?: User['role'][]
 }
 
 export default function ProtectedRoute({ children, roles }: Props) {

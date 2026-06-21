@@ -39,13 +39,17 @@ export class ChatSessionRepository {
     });
     const session =
       existing ?? (await this.prisma.chatSession.create({ data }));
-    return this.enrichWithNames(session);
+    const { ChatSessionMapper } = require('../mappers/ChatSessionMapper');
+    const enriched = await this.enrichWithNames(session);
+    return ChatSessionMapper.toDomain(enriched);
   }
 
   async endSession(id: string) {
-    return this.prisma.chatSession.update({
+    const raw = await this.prisma.chatSession.update({
       where: { id },
       data: { endedAt: new Date() },
     });
+    const { ChatSessionMapper } = require('../mappers/ChatSessionMapper');
+    return ChatSessionMapper.toDomain(raw);
   }
 }
