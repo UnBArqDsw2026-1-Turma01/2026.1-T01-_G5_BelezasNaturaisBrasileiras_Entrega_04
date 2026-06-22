@@ -33,7 +33,9 @@ export class PrismaPontosRepository {
     try {
       const client: any = (this.prisma as any).ponto;
       if (!client) throw new Error('Prisma model `ponto` não disponível');
-      return await client.findUnique({ where: { id } });
+      const raw = await client.findUnique({ where: { id } });
+      const { PontoMapper } = require('../mappers/PontoMapper');
+      return PontoMapper.toDomain(raw);
     } catch (error) {
       this.logger.error('Error finding ponto by id via Prisma', error as any);
       throw error;
@@ -47,7 +49,9 @@ export class PrismaPontosRepository {
       if (!client) throw new Error('Prisma model `ponto` não disponível');
 
       const where = this.buildWhere(filtros);
-      return await client.findMany({ where });
+      const raws = await client.findMany({ where });
+      const { PontoMapper } = require('../mappers/PontoMapper');
+      return raws.map((r: any) => PontoMapper.toDomain(r));
     } catch (error) {
       this.logger.error('Error accessing Prisma ponto model', error as any);
       throw error;
@@ -60,7 +64,9 @@ export class PrismaPontosRepository {
       if (!client) throw new Error('Prisma model `ponto` não disponível');
 
       const data = { ...this.filterData(dados), criadoPor: usuarioId };
-      return await client.create({ data });
+      const raw = await client.create({ data });
+      const { PontoMapper } = require('../mappers/PontoMapper');
+      return PontoMapper.toDomain(raw);
     } catch (error) {
       this.logger.error('Error creating ponto via Prisma', error as any);
       throw error;
@@ -73,7 +79,9 @@ export class PrismaPontosRepository {
       if (!client) throw new Error('Prisma model `ponto` não disponível');
 
       const data = this.filterData(dados);
-      return await client.update({ where: { id }, data });
+      const raw = await client.update({ where: { id }, data });
+      const { PontoMapper } = require('../mappers/PontoMapper');
+      return PontoMapper.toDomain(raw);
     } catch (error) {
       this.logger.error('Error updating ponto via Prisma', error as any);
       throw error;

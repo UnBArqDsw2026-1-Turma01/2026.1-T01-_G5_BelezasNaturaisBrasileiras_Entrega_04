@@ -1,6 +1,7 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service';
+import { RedisService } from '../../shared/infrastructure/redis/redis.service';
 import { ConfirmationCodeService } from './domain/services/ConfirmationCodeService';
 import { TrilhaEventEmitter } from './domain/observers/TrilhaEventEmitter';
 import { BadgeDistribuicaoObserver } from './domain/observers/BadgeDistribuicaoObserver';
@@ -39,6 +40,7 @@ import { ITrailLifecycleMediator } from '../pontos-turisticos/mediator/interface
   controllers: [TrilhasController],
   providers: [
     PrismaService,
+    { provide: 'RedisService', useClass: RedisService },
     {
       provide: ConfirmationCodeService,
       useValue: ConfirmationCodeService.getInstance(),
@@ -51,13 +53,14 @@ import { ITrailLifecycleMediator } from '../pontos-turisticos/mediator/interface
         prisma: PrismaService,
         auditLog: AuditLog,
         context: TrilhaRequestContext,
+        redisService: any,
       ) => {
         const base = new PrismaTrilhaRepository(prisma);
-        const cached = new CachedTrilhaRepository(base);
+        const cached = new CachedTrilhaRepository(base, redisService);
         const audited = new AuditedTrilhaRepository(cached, auditLog);
         return new TrilhaProxyRepository(audited, context);
       },
-      inject: [PrismaService, AuditLog, TrilhaRequestContext],
+      inject: [PrismaService, AuditLog, TrilhaRequestContext, 'RedisService'],
     },
     { provide: 'IInscricaoRepository', useClass: PrismaInscricaoRepository },
     { provide: 'IBadgeRepository', useClass: PrismaBadgeRepository },
