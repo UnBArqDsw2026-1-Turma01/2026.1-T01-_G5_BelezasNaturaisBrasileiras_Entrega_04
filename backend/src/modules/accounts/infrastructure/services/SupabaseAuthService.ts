@@ -7,9 +7,12 @@ export class SupabaseAuthService implements ISupabaseAuthService {
   constructor(private supabase: SupabaseClient) {}
 
   async createUser(email: string, password: string): Promise<{ uid: string }> {
-    const { data, error } = await this.supabase.auth.signUp({
+    // Usa a Admin API (service role): cria o usuario com e-mail ja confirmado,
+    // sem disparar o e-mail de confirmacao do Supabase (que tem rate limit baixo).
+    const { data, error } = await this.supabase.auth.admin.createUser({
       email,
       password,
+      email_confirm: true,
     });
 
     if (error) {

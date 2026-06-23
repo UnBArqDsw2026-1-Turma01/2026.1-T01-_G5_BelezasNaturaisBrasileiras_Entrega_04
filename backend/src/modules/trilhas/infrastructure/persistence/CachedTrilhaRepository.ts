@@ -25,17 +25,22 @@ export class CachedTrilhaRepository implements ITrilhaRepository {
       return trilha;
     }
 
-    const client = this.getClient();
     const key = `${this.prefix}id:${id}`;
-    const cached = await client.get(key);
-    if (cached) {
-      return JSON.parse(cached) as Trilha;
+    try {
+      const client = this.getClient();
+      const cached = await client.get(key);
+      if (cached) {
+        return JSON.parse(cached) as Trilha;
+      }
+      const trilha = await this.wrapped.findById(id);
+      if (trilha) {
+        await client.set(key, JSON.stringify(trilha), 'EX', this.ttlSeconds);
+      }
+      return trilha;
+    } catch {
+      // Redis indisponivel: segue direto para o banco.
+      return this.wrapped.findById(id);
     }
-    const trilha = await this.wrapped.findById(id);
-    if (trilha) {
-      await client.set(key, JSON.stringify(trilha), 'EX', this.ttlSeconds);
-    }
-    return trilha;
   }
 
   async findAll(): Promise<Trilha[]> {
@@ -45,13 +50,18 @@ export class CachedTrilhaRepository implements ITrilhaRepository {
       return this.inMemoryCacheAll;
     }
 
-    const client = this.getClient();
     const key = `${this.prefix}all`;
-    const cached = await client.get(key);
-    if (cached) return JSON.parse(cached) as Trilha[];
-    const all = await this.wrapped.findAll();
-    await client.set(key, JSON.stringify(all), 'EX', this.ttlSeconds);
-    return all;
+    try {
+      const client = this.getClient();
+      const cached = await client.get(key);
+      if (cached) return JSON.parse(cached) as Trilha[];
+      const all = await this.wrapped.findAll();
+      await client.set(key, JSON.stringify(all), 'EX', this.ttlSeconds);
+      return all;
+    } catch {
+      // Redis indisponivel: segue direto para o banco.
+      return this.wrapped.findAll();
+    }
   }
 
   async create(trilha: Trilha): Promise<Trilha> {
@@ -60,8 +70,11 @@ export class CachedTrilhaRepository implements ITrilhaRepository {
       this.inMemoryCacheAll = null;
       return created;
     }
-    const client = this.getClient();
-    await client.del(`${this.prefix}all`);
+    try {
+      await this.getClient().del(`${this.prefix}all`);
+    } catch {
+      // Redis indisponivel: nada a invalidar.
+    }
     return created;
   }
 
@@ -72,9 +85,13 @@ export class CachedTrilhaRepository implements ITrilhaRepository {
       this.inMemoryCacheAll = null;
       return saved;
     }
-    const client = this.getClient();
-    await client.del(`${this.prefix}id:${trilha.id}`);
-    await client.del(`${this.prefix}all`);
+    try {
+      const client = this.getClient();
+      await client.del(`${this.prefix}id:${trilha.id}`);
+      await client.del(`${this.prefix}all`);
+    } catch {
+      // Redis indisponivel: nada a invalidar.
+    }
     return saved;
   }
 }

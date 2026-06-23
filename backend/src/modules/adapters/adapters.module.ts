@@ -9,10 +9,12 @@ import { NotificationAdapterService } from './notify/notification-adapter.servic
 import { AdaptersController } from './adapters.controller';
 import { ExternalProviderConfigRepository } from './repositories/external-provider-config.repository';
 import { SecretsClient } from '../../shared/infrastructure/secrets/secrets.client';
+import { PrismaService } from '../../shared/infrastructure/prisma/prisma.service';
 
 @Module({
   controllers: [AdaptersController],
   providers: [
+    PrismaService,
     SecretsClient,
     ExternalProviderConfigRepository,
 
