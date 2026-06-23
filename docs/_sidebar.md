@@ -69,3 +69,4 @@
       - [4.1.6. Visão de Dados](ArquiteturaReutilizacao/DAS/4.1.6.VisaoDados.md)
     - [4.2. Reutilização de Software](ArquiteturaReutilizacao/4.2.ReutilizacaoDeSoftware.md)
     - [4.3. Participações - Arquitetura & Reutilização de Software](ArquiteturaReutilizacao/4.3.ParticipacoesArqReutilizacao.md)
+    - [4.4. Demonstração — Vidoe de demonstação da entrega 4](ArquiteturaReutilizacao/4.4.demonstracao.md)
